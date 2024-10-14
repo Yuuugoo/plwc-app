@@ -16,6 +16,10 @@ module.exports = {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: {
+                'cloud-bg': "url('/images/clouds_bg.png')",
+                'plwc-bg': "url('/images/bg1.jpg')",
+            }
         },
     },
 

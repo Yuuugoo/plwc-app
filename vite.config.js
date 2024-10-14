@@ -17,4 +17,12 @@ export default defineConfig({
             },
         }),
     ],
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.esm-bundler.js',
+        },
+    },
+    optimizeDeps: {
+        include: ['@fawmi/vue-google-maps', 'fast-deep-equal']
+    },
 });
