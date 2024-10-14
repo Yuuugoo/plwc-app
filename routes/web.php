@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\NewFriendController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Gallery;
 use App\Models\NewFriend;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -112,20 +114,18 @@ Route::prefix('group')->group(function () {
 
 });
 
-Route::get('/gallery', function () {
-    return Inertia::render('Gallery',[
-        'canLogin' => Route::has('login'),
-    ]);
-})->name('gallery');
-
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::prefix('crud')->middleware(['auth', 'verified'])->group(function () {
-    Route::get('/gallery', function () {
-        return Inertia::render('CRUD/GalleryCrud');
-    })->name('gallery-crud');
+
+    Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+    Route::get('/gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
+    Route::post('/gallery', [GalleryController::class, 'store'])->name('gallery.store');
+    Route::get('/gallery/{eventId}/edit', [GalleryController::class, 'edit'])->name('gallery.edit');
+    Route::delete('/gallery/{eventId}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+
 
     Route::get('/new-friends', [NewFriendController::class, 'index'])->name('new-friends');
     Route::get('/new-friends/create', [NewFriendController::class, 'create'])->name('new-friends.create');
@@ -136,6 +136,24 @@ Route::prefix('crud')->middleware(['auth', 'verified'])->group(function () {
 
 });
 
+Route::get('/gallery', function () {
+    $events = Gallery::all()->map(function ($event) {
+        return [
+            'id' => $event->id,
+            'event_name' => $event->event_name,
+            'image_url' => $event->event_images ? asset('storage/' . $event->event_images) : null,
+            'event_type' => $event->event_type,
+        ];
+    });
+
+    return Inertia::render('Gallery', [
+        'canLogin' => Route::has('login'),
+        'events' => $events,
+    ]);
+})->name('gallery');
+
+
+Route::get('/gallery/{gallery}', [GalleryController::class, 'show'])->name('gallery.show');
 Route::get('/new-friends/{newFriend}', [NewFriendController::class, 'show'])->name('new-friends.show');
 
 Route::get('/settings', function () {

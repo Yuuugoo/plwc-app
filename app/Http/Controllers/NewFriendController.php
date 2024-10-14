@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\NewFriend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 class NewFriendController extends Controller
@@ -47,8 +48,12 @@ class NewFriendController extends Controller
 
     public function show(NewFriend $newFriend)
     {
-        return Inertia::render('CRUD/NewFriendsShow', ['friend' => $newFriend]);
+        return Inertia::render('CRUD/NewFriendsShow', [
+            'friend' => $newFriend,
+            'canLogin' => Route::has('login'),
+        ]);
     }
+
 
     public function edit(NewFriend $newFriend)
     {

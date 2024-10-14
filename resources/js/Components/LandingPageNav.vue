@@ -105,11 +105,11 @@ const isMobileMenuOpen = ref(false);
                             v-if="showGroupSubnav" 
                             class="absolute left-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20"
                         >
-                            <li>
+                            <!-- <li>
                                 <Link :href="route('group.elementary')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     Elementary
                                 </Link>
-                            </li>
+                            </li> -->
                             <li>
                                 <Link :href="route('group.highschool.1styear')" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     High School - 1st Year College

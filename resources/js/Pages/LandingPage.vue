@@ -4,7 +4,6 @@ import LandingPageNav from '@/Components/LandingPageNav.vue';
 import Footer from '@/Components/Footer.vue';
 import { Link } from '@inertiajs/vue3';
 import FriendsCard from '@/Components/FriendsCard.vue';
-import LandingTitle from '@/Components/LandingTitle.vue';
 import { ref, onMounted } from 'vue';
 
 const props = defineProps({
@@ -43,7 +42,15 @@ onMounted(() => {
         <div class="min-h-screen bg-cloud-bg bg-no-repeat bg-cover">
             <section class="flex justify-center items-center h-full">
                 <div class="mt-32 mb-36 py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16"> 
-                    <LandingTitle />
+                    <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-7xl dark:text-white allura-font">
+                        REVIVAL 30-200
+                    </h1>
+                    <h1 class="mb-8 text-3xl font-semibold tracking-tight leading-none text-gray-750 md:text-2xl lg:text-4xl dark:text-white allura-font">
+                        30 Groups, 200 Disciples
+                    </h1>
+                    <p class="mb-8 text-lg font-normal text-gray-650 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">
+                        “‘If you can’?” said Jesus. “Everything is possible for one who believes.”.<br>[Mark 9:23]
+                    </p>
                     <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
                         <Link :href="route('about')" :active="route().current('about')" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
                             Learn More
@@ -80,3 +87,8 @@ onMounted(() => {
     </div>
 </template>
 
+<style scoped>
+.allura-font {
+    font-family: 'Allura', cursive;
+}
+</style>

@@ -48,8 +48,8 @@
                     <ul v-if="showCrudDropdown" class="pl-6 space-y-2 mt-2">
                         <li>
                             <DashboardNavLink
-                                :href="route('gallery-crud')"
-                                :active="route().current('gallery-crud')"
+                                :href="route('gallery.index')"
+                                :active="route().current('gallery.index')"
                                 class="flex items-center p-2 w-full rounded-lg bg-blue-600 hover:bg-green-600 dark:text-white group"
                             >
                                 <span class="ml-3">Gallery</span>
