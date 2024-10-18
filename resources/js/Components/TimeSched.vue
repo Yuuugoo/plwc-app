@@ -86,7 +86,7 @@
 
 
                     <button class="mt-8 w-full bg-blue-700 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-0.5">
-                        Join Us This Week
+                        Join Us This Week <br> (Under Development)
                     </button>
                 </div>
             </div>

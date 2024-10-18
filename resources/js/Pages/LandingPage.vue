@@ -1,17 +1,20 @@
 <script setup>
+import { ref, onMounted, computed, onUnmounted } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import LandingPageNav from '@/Components/LandingPageNav.vue';
 import Footer from '@/Components/Footer.vue';
 import { Link } from '@inertiajs/vue3';
 import FriendsCard from '@/Components/FriendsCard.vue';
-import { ref, onMounted, computed } from 'vue';
+import LandingEvents from '@/Components/LandingEvents.vue';
 import { useParallax, useScroll } from '@vueuse/core';
 import TimeSched from '@/Components/TimeSched.vue';
 
 const container = ref(null);
 const timeSchedContainer = ref(null);
+const eventsContainer = ref(null);
 const { tilt: cardTilt, roll: cardRoll } = useParallax(container);
 const { tilt: schedTilt, roll: schedRoll } = useParallax(timeSchedContainer);
+const { tilt: eventsTilt, roll: eventsRoll } = useParallax(eventsContainer);
 const scaleConstant = 10;
 
 const props = defineProps({
@@ -22,9 +25,14 @@ const props = defineProps({
     },
 });
 
-const isVisible = ref(false);
+// Separate visibility states for each section
+const isVisibleCard = ref(false);
+const isVisibleTimeSched = ref(false);
+const isVisibleEvents = ref(false);
+
 const cardRef = ref(null);
 const timeSchedRef = ref(null);
+const eventsRef = ref(null);
 
 const sections = ref([]);
 const currentSectionIndex = ref(0);
@@ -50,21 +58,33 @@ onMounted(() => {
     window.addEventListener('scroll', updateCurrentSection);
     updateCurrentSection();
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                isVisible.value = true;
-            } else {
-                isVisible.value = false;
-            }
+    // Create separate observers for each section
+    const createObserver = (elementRef, visibilityRef) => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                visibilityRef.value = entry.isIntersecting;
+            });
         });
+        
+        if (elementRef.value) {
+            observer.observe(elementRef.value);
+        }
+        
+        return observer;
+    };
+
+    // Create separate observers for each section
+    const cardObserver = createObserver(cardRef, isVisibleCard);
+    const timeSchedObserver = createObserver(timeSchedRef, isVisibleTimeSched);
+    const eventsObserver = createObserver(eventsRef, isVisibleEvents);
+
+    // Cleanup function
+    onUnmounted(() => {
+        cardObserver.disconnect();
+        timeSchedObserver.disconnect();
+        eventsObserver.disconnect();
+        window.removeEventListener('scroll', updateCurrentSection);
     });
-    if (cardRef.value) {
-        observer.observe(cardRef.value);
-    }
-    if (timeSchedRef.value) {
-        observer.observe(timeSchedRef.value);
-    }
 });
 </script>
 
@@ -85,14 +105,14 @@ onMounted(() => {
                     <p class="mb-8 text-lg font-normal text-gray-650 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">
                         "'If you can'?" said Jesus. "Everything is possible for one who believes.".<br>[Mark 9:23]
                     </p>
-                    <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+                    <!-- <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
                         <Link :href="route('about')" :active="route().current('about')" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
                             Learn More
                             <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                             </svg>
                         </Link>
-                    </div>
+                    </div> -->
                 </div>
                 <div v-if="isNextSection(1)" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
                     <svg class="w-6 h-6 text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -100,6 +120,9 @@ onMounted(() => {
                     </svg>
                 </div>
             </section>
+        </div>
+
+        <div>
 
             <section class="relative flex flex-col md:flex-row justify-between items-center px-4 md:px-10 py-16 transition-all duration-500"
                      :class="{ 'scale-100 opacity-100': isCurrentSection(1), 'scale-95 opacity-70': !isCurrentSection(1) }">
@@ -114,9 +137,9 @@ onMounted(() => {
                         <div
                             ref="timeSchedRef"
                             class="transition-all duration-1000 ease-out shadow-lg rounded-lg overflow-hidden"
-                            :class="{ 'translate-x-0 opacity-100': isVisible, '-translate-x-full opacity-0': !isVisible }"
+                            :class="{ 'translate-x-20 opacity-100': isVisibleTimeSched, '-translate-x-full opacity-0': !isVisibleTimeSched }"
                         >
-                            <TimeSched />
+                            <TimeSched id="time-sched-section" />
                         </div>
                     </div>
                 </div>
@@ -132,23 +155,37 @@ onMounted(() => {
                             <div
                                 ref="cardRef"
                                 class="transition-all duration-1000 ease-out shadow-lg rounded-lg overflow-hidden"
-                                :class="{ 'translate-x-0 opacity-100': isVisible, 'translate-x-full opacity-0': !isVisible }"
+                                :class="{ 'translate-x-0 opacity-100': isVisibleCard, 'translate-x-full opacity-0': !isVisibleCard }"
                             >
                                 <FriendsCard :friends="friends" />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div v-if="isNextSection(2)" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <div v-if="isNextSection(2)" class="absolute bottom-0 left-1/2 transform -translate-x-1/2 animate-bounce">
                     <svg class="w-6 h-6 text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
                     </svg>
                 </div>
             </section>
             
-            <section class="relative h-screen transition-all duration-500"
+            <section class="relative min-h-screen py-16 px-4 transition-all duration-500"
                      :class="{ 'scale-100 opacity-100': isCurrentSection(2), 'scale-95 opacity-70': !isCurrentSection(2) }">
-                <!-- Content for the third section -->
+                <div
+                    ref="eventsContainer"
+                    class="transition-transform duration-200 ease-out max-w-7xl mx-auto"
+                    :style="{
+                        transform: `perspective(1000px) rotateX(${eventsRoll * scaleConstant}deg) rotateY(${eventsTilt * scaleConstant}deg)`,
+                    }"
+                >
+                    <div
+                        ref="eventsRef"
+                        class="transition-all duration-1000 ease-out"
+                        :class="{ 'translate-y-0 opacity-100': isVisibleEvents, 'translate-y-20 opacity-0': !isVisibleEvents }"
+                    >
+                        <LandingEvents />
+                    </div>
+                </div>
             </section>
             
             <Footer />

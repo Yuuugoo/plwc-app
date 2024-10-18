@@ -62,7 +62,7 @@ const filteredImages = computed(() => {
     <Head :title="props.events.event_name + ' Gallery'" />
     <div class="flex flex-col min-h-screen">
         <LandingPageNav :canLogin="canLogin" />
-        <div class="min-h-screen bg-cloud-bg bg-no-repeat bg-cover">
+        <div class="relative min-h-screen bg-cloud-bg bg-no-repeat bg-cover">
             <section class="flex justify-center items-center h-full">
                 <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16"> 
                     <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-7xl dark:text-white allura-font">
