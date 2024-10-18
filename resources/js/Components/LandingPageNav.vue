@@ -53,7 +53,7 @@ const isMobileMenuOpen = ref(false);
 
 <template>
     <!-- Navbar -->
-    <nav class="bg-gray-800 relative dark:bg-gray-900 w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+    <nav class="bg-gradient-to-t from-indigo-600 to-sky-500 relative dark:bg-gray-900 w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
         <div class="max-w-screen-xl flex items-center justify-between mx-auto p-4">
             <!-- Logo -->
             <a href="/" class="flex items-center space-x-1 rtl:space-x-reverse">
@@ -158,7 +158,7 @@ const isMobileMenuOpen = ref(false);
                     <Link
                         v-else
                         :href="route('login')"
-                        class="text-white bg-green-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
                         Log in
                     </Link>

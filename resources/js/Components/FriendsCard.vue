@@ -1,45 +1,75 @@
+<!-- FriendCard.vue -->
 <template>
-  <div>
-    <div id="gallery" class="relative w-full h-64 md:h-72 overflow-hidden rounded-lg" data-carousel="static">
-      <div class="relative h-full w-full">
-        <div v-for="(friend, index) in friends" :key="friend.id"
-             class="absolute top-0 left-0 w-full h-full transition-opacity duration-300 ease-in-out"
-             :class="{ 'opacity-0': index !== activeIndex, 'opacity-100': index === activeIndex }">
-          <img :src="friend.avatar || '/images/default-avatar.jpg'"
-               @error="handleImageError"
-               class="w-full h-full object-cover"
-               :alt="friend.name">
+  <div class="w-full max-w-md mx-auto">
+    <div 
+      class="relative group rounded-2xl overflow-hidden transform-gpu transition-all duration-300 hover:scale-[1.02]"
+      :style="{
+        background: 'rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+      }"
+    >
+      <!-- Card Content -->
+      <div class="relative">
+        <!-- Gradient Overlay for Title -->
+        <div class="absolute top-0 left-0 right-0 h-24 z-10 bg-gradient-to-b from-black/60 to-transparent">
+          <h2 class="text-2xl font-bold text-white text-center pt-6">
+            New Burger Friends
+          </h2>
+        </div>
+
+        <!-- Image Carousel -->
+        <div class="relative aspect-[4/5] overflow-hidden">
+          <TransitionGroup name="slide">
+            <div
+              v-for="(friend, index) in friends"
+              :key="friend.id"
+              v-show="index === activeIndex"
+              class="absolute inset-0"
+            >
+              <img
+                :src="friend.avatar || '/images/default-avatar.jpg'"
+                :alt="friend.name"
+                @error="handleImageError"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              >
+              <!-- Bottom Gradient -->
+              <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+                <div class="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 class="text-xl font-semibold text-white mb-4">
+                    {{ friend.name }}
+                  </h3>
+                  <Link
+                    :href="route('new-friends.show', { newFriend: friend.id })"
+                    class="inline-flex items-center justify-center w-full px-4 py-2.5 bg-white/10 hover:bg-blue-700 border border-white/20 rounded-xl text-white font-medium transition-all duration-300 transform hover:-translate-y-0.5"
+                  >
+                    View Introduction
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </TransitionGroup>
+
+          <!-- Navigation Buttons -->
+          <button 
+            @click="prevFriend" 
+            class="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/20 backdrop-blur-md hover:hover:bg-blue-700 transition-all duration-300 group-hover:translate-x-1"
+          >
+            <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          <button 
+            @click="nextFriend" 
+            class="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/20 backdrop-blur-md hover:hover:bg-blue-700 transition-all duration-300 group-hover:-translate-x-1"
+          >
+            <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
       </div>
-      <button @click="prevFriend" type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-          <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-          </svg>
-          <span class="sr-only">Previous</span>
-        </span>
-      </button>
-      <button @click="nextFriend" type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-          <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-          </svg>
-          <span class="sr-only">Next</span>
-        </span>
-      </button>
-      <div class="absolute bottom-0 left-0 right-0 text-center bg-white bg-opacity-75 p-2 rounded-md">
-        <h4 class="text-lg font-semibold text-gray-800 dark:text-gray-900">
-          {{ friends[activeIndex]?.name || 'Unknown Friend' }}
-        </h4>
-      </div>
-    </div>
-    <div class="mt-4 text-center">
-      <Link
-        :href="route('new-friends.show', { newFriend: friends[activeIndex]?.id })"
-        class="bg-green-600 text-white px-4 py-2 rounded-lg inline-block"
-      >
-        View Introduction
-      </Link>
     </div>
   </div>
 </template>
@@ -69,3 +99,26 @@ const handleImageError = (e) => {
   e.target.src = '/images/default-avatar.jpg';
 };
 </script>
+
+<style scoped>
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-enter-from {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.slide-enter-to,
+.slide-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+</style>
