@@ -4,6 +4,7 @@ import { Head } from '@inertiajs/vue3';
 import LandingPageNav from '@/Components/LandingPageNav.vue';
 import Footer from '@/Components/Footer.vue';
 
+
 const props = defineProps({
     canLogin: Boolean,
     events: {
@@ -13,6 +14,7 @@ const props = defineProps({
 });
 
 const selectedEventType = ref('All');
+
 
 const eventTypes = computed(() => {
     const types = new Set(props.events.map(event => event.event_type));
@@ -51,60 +53,87 @@ const getAdditionalImagesCount = (event) => {
     <Head title="Church Gallery" />
     <div class="flex flex-col min-h-screen">
         <LandingPageNav :canLogin="canLogin" />
-        <div class="min-h-screen bg-cloud-bg bg-no-repeat bg-cover">
-            <section class="flex justify-center items-center h-full">
-                <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
-                    <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-7xl dark:text-white allura-font">
+        
+        <!-- Hero Section with Parallax Effect -->
+        <div class="relative h-[70vh] overflow-hidden">
+            <div class="absolute inset-0 bg-cloud-bg bg-cover bg-center bg-fixed"></div>
+            <div class="absolute inset-0 bg-black/40"></div>
+            <div class="relative flex items-center justify-center h-full text-center px-4">
+                <div class="max-w-4xl">
+                    <h1 class="mb-6 text-6xl font-extrabold text-white allura-font animate-fade-in">
                         Moments of Faith and Fellowship
                     </h1>
-                    <p class="mb-2 text-lg font-normal text-gray-650 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">
-                        "not giving up meeting together, as some are in the habit of doing, but encouraging one another—and all the more as you see the Day approaching." <br>[Hebrews 10:25]
+                    <p class="text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed animate-fade-in-delayed">
+                        "not giving up meeting together, as some are in the habit of doing, but encouraging one another—and all the more as you see the Day approaching."
+                    </p>
+                    <p class="text-lg text-gray-300 mt-2 animate-fade-in-delayed">
+                        [Hebrews 10:25]
                     </p>
                 </div>
-            </section>
-            <section class="flex justify-center items-center min-h-screen mt-2 mb-10">
-                <div class="w-3/4 px-10 py-10 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <div class="flex items-center justify-center py-4 md:py-8 flex-wrap">
-                        <button 
-                            v-for="type in eventTypes"
-                            :key="type"
-                            @click="selectedEventType = type" 
-                            type="button" 
-                            :class="[
-                                'border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 dark:border-blue-500 dark:hover:bg-blue-500 dark:focus:ring-blue-800',
-                                selectedEventType === type 
-                                    ? 'bg-blue-700 text-white' 
-                                    : 'bg-white text-blue-700 hover:text-white dark:bg-gray-900 dark:text-blue-500 dark:hover:text-white'
-                            ]"
-                        >
-                            {{ type }}
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-8">
-                        <div v-for="event in filteredEvents" :key="event.id" class="flex flex-col items-center">
-                            <div :class="{'grid grid-cols-2 gap-2': getDisplayImages(event).length > 1, 'w-full': getDisplayImages(event).length === 1}">
-                                <div v-for="(image, index) in getDisplayImages(event)" :key="index" 
-                                    :class="{'col-span-2': getDisplayImages(event).length === 1}">
-                                    <img class="h-auto w-full rounded-lg object-cover" 
-                                         :src="image" 
-                                         :alt="'Image from ' + event.event_name"
-                                         :style="getDisplayImages(event).length === 1 ? 'height: 300px;' : 'height: 150px;'">
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <div class="bg-gray-50 min-h-screen py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Filter Buttons -->
+                <div class="flex items-center justify-center space-x-2 mb-12 overflow-x-auto pb-4">
+                    <button 
+                        v-for="type in eventTypes"
+                        :key="type"
+                        @click="selectedEventType = type" 
+                        class="transition-all duration-300 ease-in-out px-6 py-2.5 rounded-full text-sm font-medium"
+                        :class="[
+                            selectedEventType === type 
+                                ? 'bg-blue-600 text-white shadow-lg scale-105' 
+                                : 'bg-white text-gray-700 hover:bg-gray-100 hover:scale-105'
+                        ]"
+                    >
+                        {{ type }}
+                    </button>
+                </div>
+
+                <!-- Gallery Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div 
+                        v-for="event in filteredEvents" 
+                        :key="event.id"
+                        class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden"
+                    >
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <div :class="{'grid grid-cols-2 gap-1': getDisplayImages(event).length > 1, 'w-full': getDisplayImages(event).length === 1}">
+                                <div 
+                                    v-for="(image, index) in getDisplayImages(event)" 
+                                    :key="index"
+                                    :class="{'col-span-2': getDisplayImages(event).length === 1}"
+                                    class="relative overflow-hidden"
+                                >
+                                    <img 
+                                        :src="image" 
+                                        :alt="'Image from ' + event.event_name"
+                                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        :style="getDisplayImages(event).length === 1 ? 'aspect-ratio: 4/3;' : 'aspect-ratio: 1/1;'"
+                                    >
                                 </div>
                             </div>
-                            <div v-if="getAdditionalImagesCount(event) > 0" class="text-sm text-gray-500 mt-2">
-                                +{{ getAdditionalImagesCount(event) }} more
-                            </div>
-                            <div class="mt-2 text-center font-semibold text-gray-900 dark:text-white">
-                                {{ event.event_name }}
-                            </div>
-                            <div class="text-sm text-gray-500">
-                                {{ event.event_type }}
+                        </div>
+
+                        <!-- Event Info Overlay -->
+                        <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="text-xl font-semibold mb-1">{{ event.event_name }}</h3>
+                            <div class="flex items-center space-x-2 text-sm opacity-80">
+                                <Camera class="w-4 h-4" />
+                                <span>{{ event.event_type }}</span>
+                                <span v-if="getAdditionalImagesCount(event) > 0" class="ml-2">
+                                    +{{ getAdditionalImagesCount(event) }} more
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
+        
         <Footer />
     </div>
 </template>
@@ -112,5 +141,19 @@ const getAdditionalImagesCount = (event) => {
 <style scoped>
 .allura-font {
     font-family: 'Allura', cursive;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-fade-in-delayed {
+    animation: fadeIn 0.8s ease-out 0.2s forwards;
+    opacity: 0;
 }
 </style>
