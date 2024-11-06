@@ -75,12 +75,6 @@ defineProps({
     font-family: 'Allura', cursive;
 }
 
-.bg-church-bg {
-    background-image: url('/path-to-your-church-image.jpg');
-    background-position: center;
-    background-size: cover;
-}
-
 button {
     transition: all 0.3s ease-in-out;
 }
