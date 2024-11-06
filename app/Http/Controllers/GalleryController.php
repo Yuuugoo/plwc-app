@@ -94,4 +94,18 @@ class GalleryController extends Controller
         $gallery->delete();
         return redirect()->route('gallery.index')->with('success', 'Event deleted successfully.');
     }
+
+    public function upload(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:jpeg,png,jpg,gif,svg'
+        ]);
+
+        $file = $request->file('file');
+        $path = $file->store('gallery', 'public');
+        
+        return response()->json([
+            'path' => $path
+        ]);
+    }
 }

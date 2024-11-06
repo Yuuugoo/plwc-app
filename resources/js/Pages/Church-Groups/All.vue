@@ -140,7 +140,7 @@ const handleTabChange = (tabId) => {
         
         <main class="flex-grow bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
             <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-12">
+                <div class="text-center mt-20 mb-12">
                     <h1 class="text-4xl font-bold text-gray-900 mb-4">Group Directory</h1>
                     <p class="text-lg text-gray-600">Browse through our organization's various groups and members</p>
                 </div>

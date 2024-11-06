@@ -19,6 +19,7 @@ module.exports = {
             backgroundImage: {
                 'cloud-bg': "url('/images/clouds_bg.png')",
                 'plwc-bg': "url('/images/bg1.jpg')",
+                'worship-bg': "url('/images/worship_bg.jpg')",
             }
         },
     },

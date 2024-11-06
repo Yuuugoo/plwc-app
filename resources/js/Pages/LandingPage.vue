@@ -25,7 +25,7 @@ const props = defineProps({
     },
 });
 
-// Separate visibility states for each section
+
 const isVisibleCard = ref(false);
 const isVisibleTimeSched = ref(false);
 const isVisibleEvents = ref(false);
@@ -52,6 +52,20 @@ const updateCurrentSection = () => {
 
 const isCurrentSection = computed(() => (index) => index === currentSectionIndex.value);
 const isNextSection = computed(() => (index) => index === currentSectionIndex.value + 1);
+
+const isLargeScreen = ref(window.innerWidth >= 1024)
+
+const handleResize = () => {
+    isLargeScreen.value = window.innerWidth >= 1024
+}
+
+onMounted(() => {
+    window.addEventListener('resize', handleResize)
+})
+
+onUnmounted(() => {
+    window.removeEventListener('resize', handleResize)
+})
 
 onMounted(() => {
     sections.value = document.querySelectorAll('section');
@@ -96,15 +110,16 @@ onMounted(() => {
             <section class="relative flex justify-center items-center h-full transition-all duration-500"
                      :class="{ 'scale-100 opacity-100': isCurrentSection(0), 'scale-95 opacity-70': !isCurrentSection(0) }">
                 <div class="mt-32 mb-36 px-4 mx-auto max-w-screen-xl text-center lg:py-16"> 
-                    <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-7xl dark:text-white allura-font">
+                    <h1 class="mb-4 text-4xl md:text-6xl lg:text-8xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white allura-font">
                         REVIVAL 30-200
                     </h1>
-                    <h1 class="mb-8 text-3xl font-semibold tracking-tight leading-none text-gray-750 md:text-2xl lg:text-4xl dark:text-white allura-font">
+                    <h1 class="mb-6 text-3xl md:text-5xl lg:text-8xl font-semibold tracking-tight leading-none text-gray-750 dark:text-white allura-font">
                         30 Groups, 200 Disciples
                     </h1>
-                    <p class="mb-8 text-lg font-normal text-gray-650 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">
+                    <p class="mb-8 text-lg md:text-xl lg:text-2xl font-normal text-gray-650 dark:text-gray-400">
                         "'If you can'?" said Jesus. "Everything is possible for one who believes.".<br>[Mark 9:23]
                     </p>
+
                     <!-- <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
                         <Link :href="route('about')" :active="route().current('about')" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
                             Learn More
@@ -114,7 +129,7 @@ onMounted(() => {
                         </Link>
                     </div> -->
                 </div>
-                <div v-if="isNextSection(1)" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <div v-if="isNextSection(1)" class="absolute bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce">
                     <svg class="w-6 h-6 text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
                     </svg>
@@ -123,22 +138,25 @@ onMounted(() => {
         </div>
 
         <div>
-
-            <section class="relative flex flex-col md:flex-row justify-between items-center px-4 md:px-10 py-16 transition-all duration-500"
+            <section class="relative flex flex-col md:flex-row justify-between items-center px-4 md:px-10 lg:py-24 lg:mb-10 transition-all duration-500"
                      :class="{ 'scale-100 opacity-100': isCurrentSection(1), 'scale-95 opacity-70': !isCurrentSection(1) }">
-                <div class="w-full md:w-1/2 mb-8 md:mb-0">
+                <div class="md:w-1/2mb-8 md:mb-0">
                     <div
                         ref="timeSchedContainer"
                         class="transition-transform duration-200 ease-out"
                         :style="{
-                            transform: `perspective(1000px) rotateX(${schedRoll * scaleConstant}deg) rotateY(${schedTilt * scaleConstant}deg)`,
+                            transform: `perspective(5000px) rotateX(${schedRoll * scaleConstant}deg) rotateY(${schedTilt * scaleConstant}deg)`,
                         }"
                     >
-                        <div
-                            ref="timeSchedRef"
-                            class="transition-all duration-1000 ease-out shadow-lg rounded-lg overflow-hidden"
-                            :class="{ 'translate-x-20 opacity-100': isVisibleTimeSched, '-translate-x-full opacity-0': !isVisibleTimeSched }"
-                        >
+                    <div
+                        ref="timeSchedRef"
+                        class="transition-all duration-1000 ease-out shadow-lg rounded-lg overflow-hidden"
+                        :class="{
+                            'lg:translate-x-20 translate-x-0 opacity-100': isVisibleTimeSched,
+                            'lg:-translate-x-0 -translate-x-full opacity-0': !isVisibleTimeSched
+                        }"
+                    >
+
                             <TimeSched id="time-sched-section" />
                         </div>
                     </div>
@@ -149,7 +167,7 @@ onMounted(() => {
                             ref="container"
                             class="transition-transform duration-200 ease-out w-full"
                             :style="{
-                                transform: `perspective(1000px) rotateX(${cardRoll * scaleConstant}deg) rotateY(${cardTilt * scaleConstant}deg)`,
+                                transform: `perspective(2000px) rotateX(${cardRoll * scaleConstant}deg) rotateY(${cardTilt * scaleConstant}deg)`,
                             }"
                         >
                             <div
@@ -170,13 +188,16 @@ onMounted(() => {
             </section>
             
             <section class="relative min-h-screen py-16 px-4 transition-all duration-500"
-                     :class="{ 'scale-100 opacity-100': isCurrentSection(2), 'scale-95 opacity-70': !isCurrentSection(2) }">
+                :class="{ 'scale-100 opacity-100': isCurrentSection(2), 'scale-95 opacity-70': !isCurrentSection(2) }">
                 <div
                     ref="eventsContainer"
-                    class="transition-transform duration-200 ease-out max-w-7xl mx-auto"
-                    :style="{
-                        transform: `perspective(1000px) rotateX(${eventsRoll * scaleConstant}deg) rotateY(${eventsTilt * scaleConstant}deg)`,
-                    }"
+                    class="max-w-7xl mx-auto"
+                    :class="{ 'transition-transform duration-200 ease-out': isLargeScreen }"
+                    :style="isLargeScreen 
+                        ? {
+                            transform: `perspective(5000px) rotateX(${eventsRoll * scaleConstant}deg) rotateY(${eventsTilt * scaleConstant}deg)`
+                        }
+                        : {}"
                 >
                     <div
                         ref="eventsRef"

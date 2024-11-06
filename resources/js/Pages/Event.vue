@@ -48,9 +48,9 @@ const props = defineProps({
         <LandingPageNav :canLogin="canLogin" />
         
         <!-- Hero Section -->
-        <div class="relative bg-gradient-to-b from-blue-600 to-blue-400 py-20">
+        <div class="relative bg-gradient-to-t from-blue-600 to-blue-400 py-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center">
+                <div class="text-center mt-20">
                     <h1 class="text-4xl font-bold text-white sm:text-5xl lg:text-6xl animate-fade-in">
                         Join Our Events
                     </h1>

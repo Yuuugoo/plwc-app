@@ -21,19 +21,19 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Weekly Services</h2>
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Weekly Service</h2>
                     </div>
 
                     <!-- Schedule Items -->
                     <div class="space-y-6">
                         <div class="schedule-item">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">First Worship</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Worship</h3>
                             <div class="flex items-center text-gray-600 dark:text-gray-300 space-x-4">
                                 <span class="inline-flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                9:00 AM - 9:10 AM
+                                9:00 AM - 12:30 PM
                                 </span>
                                 <span class="inline-flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -46,32 +46,13 @@
                         </div>
 
                         <div class="schedule-item">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Bible Study</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Group Meetings</h3>
                             <div class="flex items-center text-gray-600 dark:text-gray-300 space-x-4">
                                 <span class="inline-flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                9:10 AM - 9:40 AM
-                                </span>
-                                <span class="inline-flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                                Main Sanctuary
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="schedule-item">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Second Worship</h3>
-                            <div class="flex items-center text-gray-600 dark:text-gray-300 space-x-4">
-                                <span class="inline-flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                10:00 AM - 12:00 NN
+                                01:00 PM - 02:00 PM
                                 </span>
                                 <span class="inline-flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -6,7 +6,7 @@
                 <!-- Footer Logo -->
                 <div class="flex justify-center md:justify-start">
                     <a href="/" class="flex items-center">
-                        <img src="/images/plwc-logo.png" class="h-16 w-24" alt="PLWC LOGO">
+                        <img src="/images/plwc-logo.png" class="h-16 w-24 lg:h-36 lg:w-full" alt="PLWC LOGO">
                     </a>
                 </div>
                 <!-- Contacts -->
