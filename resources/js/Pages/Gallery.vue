@@ -4,7 +4,6 @@ import { Head } from '@inertiajs/vue3';
 import LandingPageNav from '@/Components/LandingPageNav.vue';
 import Footer from '@/Components/Footer.vue';
 
-
 const props = defineProps({
     canLogin: Boolean,
     events: {
@@ -14,7 +13,8 @@ const props = defineProps({
 });
 
 const selectedEventType = ref('All');
-
+const showModal = ref(false);
+const selectedEvent = ref(null);
 
 const eventTypes = computed(() => {
     const types = new Set(props.events.map(event => event.event_type));
@@ -46,6 +46,16 @@ const getDisplayImages = (event) => {
 const getAdditionalImagesCount = (event) => {
     const images = parseImageUrls(event.image_url);
     return Math.max(0, images.length - 4);
+};
+
+const openEventModal = (event) => {
+    selectedEvent.value = event;
+    showModal.value = true;
+};
+
+const closeModal = () => {
+    showModal.value = false;
+    selectedEvent.value = null;
 };
 </script>
 
@@ -98,7 +108,8 @@ const getAdditionalImagesCount = (event) => {
                     <div 
                         v-for="event in filteredEvents" 
                         :key="event.id"
-                        class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden"
+                        @click="openEventModal(event)"
+                        class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
                     >
                         <div class="aspect-[4/3] overflow-hidden">
                             <div :class="{'grid grid-cols-2 gap-1': getDisplayImages(event).length > 1, 'w-full': getDisplayImages(event).length === 1}">
@@ -133,10 +144,37 @@ const getAdditionalImagesCount = (event) => {
                 </div>
             </div>
         </div>
+
+        <div 
+            v-if="showModal" 
+            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            @click.self="closeModal"
+        >
+            <div class="bg-white p-6 rounded-lg max-w-3xl w-full relative">
+                <button @click="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                    &times;
+                </button>
+                
+                <h3 class="text-2xl font-bold mb-4">{{ selectedEvent?.event_name }}</h3>
+                <p class="text-sm text-gray-600 mb-6">{{ selectedEvent?.event_type }}</p>
+                
+                <!-- Display all images related to the selected event -->
+                <div class="grid grid-cols-2 gap-4">
+                    <img 
+                        v-for="(image, index) in parseImageUrls(selectedEvent?.image_url)" 
+                        :key="index" 
+                        :src="`/storage/${image}`" 
+                        alt="Event Image" 
+                        class="w-full h-48 object-cover rounded"
+                    />
+                </div>
+            </div>
+        </div>
         
         <Footer />
     </div>
 </template>
+
 
 <style scoped>
 .allura-font {

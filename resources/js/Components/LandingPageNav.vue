@@ -33,7 +33,7 @@
                         @mouseenter="openAboutSubnav"
                         @mouseleave="closeAboutSubnav"
                     >
-                        <Link :href="route('about')" :active="route().current('about')" class="flex text-lg font-semibold items-center space-x-1" :class="{ 'text-indigo-600': route().current('about') || route().current('about.news') || route().current('about.contacts') }">
+                        <Link :href="route('about')" :active="route().current('about')" class="flex text-lg font-semibold items-center space-x-1" :class="{ 'text-indigo-600': route().current('about') || route().current('about.mission-vision') || route().current('about.history') }">
                             <span>About</span>
                             <svg 
                                 class="w-4 h-4 transition-transform duration-200"
@@ -55,16 +55,16 @@
                         >
                             <div v-show="showAboutSubnav" class="absolute left-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
                                 <Link 
-                                    :href="route('about.news')" 
+                                    :href="route('about.mission-vision')" 
                                     class="block px-4 py-2 text-lg font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
                                 >
-                                    Content 1
+                                    Mission & Vision
                                 </Link>
                                 <Link 
-                                    :href="route('about.contacts')" 
+                                    :href="route('about.history')" 
                                     class="block px-4 py-2 text-lg font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
                                 >
-                                    Content 2
+                                    Church History
                                 </Link>
                             </div>
                         </Transition>
@@ -222,16 +222,16 @@
                         class="pl-4 space-y-2"
                     >
                         <Link 
-                            :href="route('about.news')"
+                            :href="route('about.mission-vision')"
                             class="mobile-nav-link"
                         >
-                            Content 1
+                            Mission & Vision
                         </Link>
                         <Link 
-                            :href="route('about.contacts')"
+                            :href="route('about.history')"
                             class="mobile-nav-link"
                         >
-                            Content 2
+                            Church History
                         </Link>
                     </div>
                 </div>

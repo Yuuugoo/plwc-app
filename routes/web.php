@@ -49,17 +49,17 @@ Route::prefix('about')->group(function () {
         ]);
     })->name('about');
 
-    Route::get('/1', function () {
-        return Inertia::render('About/About1', [
+    Route::get('/mission-vision', function () {
+        return Inertia::render('About/MissionVision', [
             'canLogin' => Route::has('login'),
         ]);
-    })->name('about.news');
+    })->name('about.mission-vision');
 
-    Route::get('/2', function () {
-        return Inertia::render('About/About2', [
+    Route::get('/history', function () {
+        return Inertia::render('About/History', [
             'canLogin' => Route::has('login'),
         ]);
-    })->name('about.contacts');
+    })->name('about.history');
 
     // Route::get('/{page}', function ($page) {
     //     return Inertia::render('About2', [

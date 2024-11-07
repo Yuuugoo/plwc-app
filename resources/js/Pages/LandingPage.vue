@@ -72,7 +72,6 @@ onMounted(() => {
     window.addEventListener('scroll', updateCurrentSection);
     updateCurrentSection();
 
-    // Create separate observers for each section
     const createObserver = (elementRef, visibilityRef) => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -87,12 +86,10 @@ onMounted(() => {
         return observer;
     };
 
-    // Create separate observers for each section
     const cardObserver = createObserver(cardRef, isVisibleCard);
     const timeSchedObserver = createObserver(timeSchedRef, isVisibleTimeSched);
     const eventsObserver = createObserver(eventsRef, isVisibleEvents);
 
-    // Cleanup function
     onUnmounted(() => {
         cardObserver.disconnect();
         timeSchedObserver.disconnect();
@@ -107,30 +104,23 @@ onMounted(() => {
     <div class="flex-grow flex-col min-h-screen overflow-hidden">
         <LandingPageNav :canLogin="canLogin" />
         <div class="min-h-screen bg-cloud-bg bg-no-repeat bg-cover">
-            <section class="relative flex justify-center items-center h-full transition-all duration-500"
-                     :class="{ 'scale-100 opacity-100': isCurrentSection(0), 'scale-95 opacity-70': !isCurrentSection(0) }">
-                <div class="mt-32 mb-36 px-4 mx-auto max-w-screen-xl text-center lg:py-16"> 
-                    <h1 class="mb-4 text-4xl md:text-6xl lg:text-8xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white allura-font">
+            <section class="relative flex justify-center items-center min-h-screen transition-all duration-500"
+                    :class="{ 'scale-100 opacity-100': isCurrentSection(0), 'scale-95 opacity-70': !isCurrentSection(0) }">
+                <div class="px-4 mx-auto max-w-screen-xl text-center mt-8 sm:mt-16 md:mt-48 mb-8 sm:mb-16 md:mb-36">
+                    <h1 class="mb-3 sm:mb-4 text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white allura-font">
                         REVIVAL 30-200
                     </h1>
-                    <h1 class="mb-6 text-3xl md:text-5xl lg:text-8xl font-semibold tracking-tight leading-none text-gray-750 dark:text-white allura-font">
+                    <h1 class="mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-5xl lg:text-8xl font-semibold tracking-tight leading-none text-gray-750 dark:text-white allura-font">
                         30 Groups, 200 Disciples
                     </h1>
-                    <p class="mb-8 text-lg md:text-xl lg:text-2xl font-normal text-gray-650 dark:text-gray-400">
-                        "'If you can'?" said Jesus. "Everything is possible for one who believes.".<br>[Mark 9:23]
+                    <p class="text-sm sm:text-base md:text-xl lg:text-2xl font-medium text-gray-650 dark:text-gray-400">
+                        "'If you can'?" said Jesus.<br class="sm:hidden">
+                        "Everything is possible for one who believes."<br>
+                        Mark 9:23
                     </p>
-
-                    <!-- <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
-                        <Link :href="route('about')" :active="route().current('about')" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                            Learn More
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </Link>
-                    </div> -->
                 </div>
-                <div v-if="isNextSection(1)" class="absolute bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce">
-                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                <div v-if="isNextSection(1)" class="absolute bottom-4 sm:bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce">
+                    <svg class="w-4 h-4 sm:w-6 sm:h-6 text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
                     </svg>
                 </div>

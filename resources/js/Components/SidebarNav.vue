@@ -7,7 +7,7 @@
         <!-- Logo -->
         <div class="px-6 pb-4">
             <Link :href="route('home')" class="flex justify-center items-center mb-6">
-                <ApplicationLogo class="block fill-current text-gray-800 dark:text-gray-200" />
+                <ApplicationLogo class="block h-10 lg:h-20 w-auto fill-current text-gray-800 dark:text-gray-200" />
             </Link>
         </div>
 
