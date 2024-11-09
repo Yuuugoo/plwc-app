@@ -158,7 +158,7 @@ const closeModal = () => {
                 <h3 class="text-2xl font-bold mb-4">{{ selectedEvent?.event_name }}</h3>
                 <p class="text-sm text-gray-600 mb-6">{{ selectedEvent?.event_type }}</p>
                 
-                <!-- Display all images related to the selected event -->
+
                 <div class="grid grid-cols-2 gap-4">
                     <img 
                         v-for="(image, index) in parseImageUrls(selectedEvent?.image_url)" 

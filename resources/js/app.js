@@ -8,11 +8,10 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import VueGoogleMaps from '@fawmi/vue-google-maps';
 
 
-const appName = import.meta.env.VITE_APP_NAME || 'PLWC';
-
+const appName = import.meta.env.VITE_APP_NAME || '';
 
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
+    title: (title) => `${title} ${appName}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
