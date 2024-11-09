@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import LandingPageNav from '@/Components/LandingPageNav.vue';
 import Footer from '@/Components/Footer.vue';
@@ -11,10 +11,12 @@ const props = defineProps({
         required: true,
     },
 });
-
+console.log(props.events);
 const selectedEventType = ref('All');
 const showModal = ref(false);
+const showImageViewer = ref(false);
 const selectedEvent = ref(null);
+const currentImageIndex = ref(0);
 
 const eventTypes = computed(() => {
     const types = new Set(props.events.map(event => event.event_type));
@@ -57,14 +59,55 @@ const closeModal = () => {
     showModal.value = false;
     selectedEvent.value = null;
 };
+
+const openImageViewer = (event, index) => {
+    selectedEvent.value = event;
+    currentImageIndex.value = index;
+    showImageViewer.value = true;
+};
+
+const closeImageViewer = () => {
+    showImageViewer.value = false;
+    currentImageIndex.value = 0;
+};
+
+const nextImage = () => {
+    const images = parseImageUrls(selectedEvent.value.image_url);
+    currentImageIndex.value = (currentImageIndex.value + 1) % images.length;
+};
+
+const previousImage = () => {
+    const images = parseImageUrls(selectedEvent.value.image_url);
+    currentImageIndex.value = (currentImageIndex.value - 1 + images.length) % images.length;
+};
+
+const handleKeydown = (e) => {
+    if (showImageViewer.value) {
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') previousImage();
+        if (e.key === 'Escape') closeImageViewer();
+    }
+    if (showModal.value && e.key === 'Escape') {
+        closeModal();
+    }
+};
+
+onMounted(() => {
+    window.addEventListener('keydown', handleKeydown);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('keydown', handleKeydown);
+});
 </script>
 
 <template>
     <Head title="Church Gallery" />
+    
     <div class="flex flex-col min-h-screen">
         <LandingPageNav :canLogin="canLogin" />
         
-        <!-- Hero Section with Parallax Effect -->
+        <!-- Hero Section -->
         <div class="relative h-[70vh] overflow-hidden">
             <div class="absolute inset-0 bg-cloud-bg bg-cover bg-center bg-fixed"></div>
             <div class="absolute inset-0 bg-black/40"></div>
@@ -73,11 +116,11 @@ const closeModal = () => {
                     <h1 class="mb-6 text-6xl font-extrabold text-white allura-font animate-fade-in">
                         Moments of Faith and Fellowship
                     </h1>
-                    <p class="text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed animate-fade-in-delayed">
+                    <p class="text-xl font-medium text-gray-200 max-w-2xl mx-auto leading-relaxed animate-fade-in-delayed">
                         "not giving up meeting together, as some are in the habit of doing, but encouraging one another—and all the more as you see the Day approaching."
                     </p>
-                    <p class="text-lg text-gray-300 mt-2 animate-fade-in-delayed">
-                        [Hebrews 10:25]
+                    <p class="text-lg font-medium text-gray-300 mt-2 animate-fade-in-delayed">
+                        Hebrews 10:24-25
                     </p>
                 </div>
             </div>
@@ -108,16 +151,17 @@ const closeModal = () => {
                     <div 
                         v-for="event in filteredEvents" 
                         :key="event.id"
-                        @click="openEventModal(event)"
-                        class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+                        class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden"
                     >
+                        <!-- Images Grid -->
                         <div class="aspect-[4/3] overflow-hidden">
                             <div :class="{'grid grid-cols-2 gap-1': getDisplayImages(event).length > 1, 'w-full': getDisplayImages(event).length === 1}">
                                 <div 
                                     v-for="(image, index) in getDisplayImages(event)" 
                                     :key="index"
                                     :class="{'col-span-2': getDisplayImages(event).length === 1}"
-                                    class="relative overflow-hidden"
+                                    class="relative overflow-hidden cursor-pointer"
+                                    @click.stop="openImageViewer(event, index)"
                                 >
                                     <img 
                                         :src="image" 
@@ -125,18 +169,21 @@ const closeModal = () => {
                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         :style="getDisplayImages(event).length === 1 ? 'aspect-ratio: 4/3;' : 'aspect-ratio: 1/1;'"
                                     >
+                                    <div class="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors duration-300"></div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Event Info Overlay -->
-                        <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-300">
+                        <div 
+                            @click="openEventModal(event)"
+                            class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-300 cursor-pointer"
+                        >
                             <h3 class="text-xl font-semibold mb-1">{{ event.event_name }}</h3>
                             <div class="flex items-center space-x-2 text-sm opacity-80">
-                                <Camera class="w-4 h-4" />
                                 <span>{{ event.event_type }}</span>
                                 <span v-if="getAdditionalImagesCount(event) > 0" class="ml-2">
-                                    +{{ getAdditionalImagesCount(event) }} more
+                                    +{{ getAdditionalImagesCount(event) }} more photos
                                 </span>
                             </div>
                         </div>
@@ -145,28 +192,82 @@ const closeModal = () => {
             </div>
         </div>
 
+        <!-- Event Modal -->
         <div 
             v-if="showModal" 
-            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            class="fixed inset-0 bg-black/50 flex items-center justify-center z-40"
             @click.self="closeModal"
         >
-            <div class="bg-white p-6 rounded-lg max-w-3xl w-full relative">
-                <button @click="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
-                    &times;
+            <div class="bg-white p-6 rounded-lg max-w-4xl w-full mx-4 relative">
+                <button 
+                    @click="closeModal" 
+                    class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl"
+                >
+                    ×
                 </button>
                 
-                <h3 class="text-2xl font-bold mb-4">{{ selectedEvent?.event_name }}</h3>
-                <p class="text-sm text-gray-600 mb-6">{{ selectedEvent?.event_type }}</p>
+                <h3 class="text-2xl font-bold mb-2">{{ selectedEvent?.event_name }}</h3>
+                <p class="text-sm text-gray-600 mb-6">{{ selectedEvent?.event_description }}</p>
                 
-
-                <div class="grid grid-cols-2 gap-4">
-                    <img 
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <div 
                         v-for="(image, index) in parseImageUrls(selectedEvent?.image_url)" 
-                        :key="index" 
-                        :src="`/storage/${image}`" 
-                        alt="Event Image" 
-                        class="w-full h-48 object-cover rounded"
-                    />
+                        :key="index"
+                        class="relative aspect-square cursor-pointer group"
+                        @click="openImageViewer(selectedEvent, index)"
+                    >
+                        <img 
+                            :src="`/storage/${image}`" 
+                            :alt="'Image from ' + selectedEvent?.event_name" 
+                            class="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+                        />
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 rounded-lg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Viewer -->
+        <div 
+            v-if="showImageViewer" 
+            class="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
+            @click.self="closeImageViewer"
+        >
+            <div class="relative w-full h-full flex items-center justify-center">
+                <!-- Close button -->
+                <button 
+                    @click="closeImageViewer"
+                    class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-50 text-4xl"
+                >
+                    ×
+                </button>
+
+                <!-- Navigation buttons -->
+                <button 
+                    @click.stop="previousImage"
+                    class="absolute left-4 text-white hover:text-gray-300 transition-colors text-6xl"
+                >
+                    ‹
+                </button>
+                <button 
+                    @click.stop="nextImage"
+                    class="absolute right-4 text-white hover:text-gray-300 transition-colors text-6xl"
+                >
+                    ›
+                </button>
+
+                <!-- Main image -->
+                <div class="w-full h-full p-8 flex items-center justify-center">
+                    <img 
+                        :src="`/storage/${parseImageUrls(selectedEvent?.image_url)[currentImageIndex]}`"
+                        :alt="selectedEvent?.event_name"
+                        class="max-h-full max-w-full object-contain"
+                    >
+                </div>
+
+                <!-- Image counter -->
+                <div class="absolute bottom-4 left-0 right-0 text-center text-white">
+                    {{ currentImageIndex + 1 }} / {{ parseImageUrls(selectedEvent?.image_url).length }}
                 </div>
             </div>
         </div>
@@ -175,15 +276,20 @@ const closeModal = () => {
     </div>
 </template>
 
-
 <style scoped>
 .allura-font {
     font-family: 'Allura', cursive;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }
 
 .animate-fade-in {
@@ -193,5 +299,20 @@ const closeModal = () => {
 .animate-fade-in-delayed {
     animation: fadeIn 0.8s ease-out 0.2s forwards;
     opacity: 0;
+}
+
+.modal-enter-active,
+.modal-leave-active {
+    transition: opacity 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+    opacity: 0;
+}
+
+img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 </style>

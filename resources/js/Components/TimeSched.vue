@@ -85,3 +85,4 @@ content: '';
 @apply absolute w-3 h-3 bg-indigo-600 rounded-full -left-[7px] top-2;
 }
 </style>
+

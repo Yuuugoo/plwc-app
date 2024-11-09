@@ -222,6 +222,12 @@
                         class="pl-4 space-y-2"
                     >
                         <Link 
+                            :href="route('about')"
+                            class="mobile-nav-link"
+                        >
+                            Main About
+                        </Link>
+                        <Link 
                             :href="route('about.mission-vision')"
                             class="mobile-nav-link"
                         >
@@ -257,6 +263,12 @@
                         v-show="activeDropdown === 'mobileGroups'"
                         class="pl-4 space-y-2"
                     >
+                        <Link 
+                            :href="route('group')"
+                            class="mobile-nav-link"
+                        >
+                            All Officers
+                        </Link>
                         <Link 
                             v-for="link in groupLinks"
                             :key="link.route"

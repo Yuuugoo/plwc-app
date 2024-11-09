@@ -142,6 +142,7 @@ Route::get('/gallery', function () {
         return [
             'id' => $event->id,
             'event_name' => $event->event_name,
+            'event_description' => $event->event_description,
             'image_url' => $event->event_images ? asset('storage/' . $event->event_images) : null,
             'event_type' => $event->event_type,
         ];

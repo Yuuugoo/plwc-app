@@ -106,11 +106,11 @@ onMounted(() => {
         <div class="min-h-screen bg-cloud-bg bg-no-repeat bg-cover">
             <section class="relative flex justify-center items-center min-h-screen transition-all duration-500"
                     :class="{ 'scale-100 opacity-100': isCurrentSection(0), 'scale-95 opacity-70': !isCurrentSection(0) }">
-                <div class="px-4 mx-auto max-w-screen-xl text-center mt-8 sm:mt-16 md:mt-48 mb-8 sm:mb-16 md:mb-36">
-                    <h1 class="mb-3 sm:mb-4 text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white allura-font">
+                <div class="px-6 max-w-screen-2xl text-center mt-8 sm:mt-16 md:mt-48 mb-8 sm:mb-16 md:mb-36">
+                    <h1 class="mb-3 sm:mb-4 text-3xl sm:text-4xl md:text-6xl lg:text-9xl font-semibold tracking-tight leading-none text-gray-900 dark:text-white allura-font">
                         REVIVAL 30-200
                     </h1>
-                    <h1 class="mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-5xl lg:text-8xl font-semibold tracking-tight leading-none text-gray-750 dark:text-white allura-font">
+                    <h1 class="mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-5xl lg:text-9xl font-semibold tracking-tight leading-none text-gray-750 dark:text-white allura-font">
                         30 Groups, 200 Disciples
                     </h1>
                     <p class="text-sm sm:text-base md:text-xl lg:text-2xl font-medium text-gray-650 dark:text-gray-400">
@@ -205,9 +205,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.allura-font {
-    font-family: 'Allura', cursive;
-}
+
 
 .animate-bounce {
     animation: bounce 1s infinite;

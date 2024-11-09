@@ -15,115 +15,126 @@ defineProps({
     <div class="flex flex-col min-h-screen">
         <LandingPageNav :canLogin="canLogin" />
         <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-            <section class="flex justify-center items-center min-h-screen">
-                <div class="w-3/4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800" id="defaultTab" data-tabs-toggle="#defaultTabContent" role="tablist">
-                        <li class="me-2">
-                            <button id="officers-tab" data-tabs-target="#officers" type="button" role="tab" aria-controls="officers" aria-selected="true" class="inline-block p-4 text-blue-600 rounded-ss-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-500">Officers</button>
-                        </li>
-                        <li class="me-2">
-                            <button id="members-tab" data-tabs-target="#members" type="button" role="tab" aria-controls="members" aria-selected="false" class="inline-block p-4 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-300">Members</button>
-                        </li>
-                    </ul>
-                    <div id="defaultTabContent">
-                        <!-- Officers Tab -->
-                        <div class="p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="officers" role="tabpanel" aria-labelledby="officers-tab">
-                            <h2 class="mb-5 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">4th Year College Officers</h2>
-                            <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-                                <!-- President -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_male3.jpg" alt="President" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">President</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Jovi Dela Cruz</p>
-                                </div>
-                                <!-- Vice President -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_female2.jpg" alt="Vice President" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Vice President</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Aileen Marfil</p>
-                                </div>
-                                <!-- Secretary -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_female.jpg" alt="Secretary" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Secretary</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Johann Nicole Delanon</p>
-                                </div>
-                                <!-- Treasurer -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_female1.jpg" alt="Treasurer" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Treasurer</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Crystal Gabrielle Ungab </p>
-                                </div>
+            <!-- Mission/Vision Section -->
+            <section class="py-16 px-4">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h1 class="text-4xl font-bold text-gray-900 mb-8 mt-28">4th Year College Officers </h1>
+                    <div class="grid md:grid-cols-2 gap-8 mb-16">
+                        <!-- Mission Card -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="h-16 w-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
                             </div>
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Our Mission</h2>
+                            <p class="text-gray-600 leading-relaxed">
+                                To establish a Christ-centered student community where faith flourishes, leadership serves with humility, and every member grows in their relationship with God. We envision a campus where spiritual values guide academic pursuits, where students find strength in fellowship, and where God's love transforms lives through our service and example.
+                            </p>
                         </div>
 
-                        <!-- Members Tab -->
-                        <div class="hidden p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="members" role="tabpanel" aria-labelledby="members-tab">
-                            <h2 class="mb-5 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">4th Year College Members</h2>
-                            <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-                                <!-- Member 1 -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_male.jpg" alt="Member" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Member</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Mark Daniel Cristoles</p>
-                                </div>
-                                <!-- Member 2 -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_male1.jpg" alt="Member" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Member</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">John Jowell Bayran</p>
-                                </div>
-                                <!-- Member 3 -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_male2.jpg" alt="Member" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Member</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Frederick Catabay</p>
-                                </div>
-                                <!-- Member 4 -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_male3.jpg" alt="Member" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Member</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">John Rianiel Remigio </p>
+                        <!-- Vision Card -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="h-16 w-16 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Our Vision</h2>
+                            <p class="text-gray-600 leading-relaxed">
+                                To be recognized as a leading student organization that empowers future professionals, cultivates leadership, and creates lasting positive impact in our academic community.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Officers Section -->
+            <section class="py-16 px-4">
+                <div class="max-w-6xl mx-auto">
+                    <div class="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
+                        <div class="p-8">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Meet Our Officers</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                                <!-- President -->
+                                <div class="group">
+                                    <div class="relative overflow-hidden rounded-lg">
+                                        <img 
+                                            src="/images/avatar_male3.jpg" 
+                                            alt="President" 
+                                            class="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute bottom-0 left-0 right-0 p-4">
+                                                <p class="text-white text-sm">Jovi's Motto - Leading with vision and dedication</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-center">
+                                        <h3 class="text-xl font-bold text-gray-900">Jovi Dela Cruz</h3>
+                                        <p class="text-blue-600 font-medium">President</p>
+                                    </div>
                                 </div>
 
-                                <div class="text-center">
-                                    <img src="/images/avatar_male3.jpg" alt="Member" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Member</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">AJ Delan</p>
+                                <!-- Vice President -->
+                                <div class="group">
+                                    <div class="relative overflow-hidden rounded-lg">
+                                        <img 
+                                            src="/images/avatar_female2.jpg" 
+                                            alt="Vice President" 
+                                            class="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute bottom-0 left-0 right-0 p-4">
+                                                <p class="text-white text-sm">Aileen's Motto - Supporting progress and innovation</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-center">
+                                        <h3 class="text-xl font-bold text-gray-900">Aileen Marfil</h3>
+                                        <p class="text-blue-600 font-medium">Vice President</p>
+                                    </div>
                                 </div>
-                                <!-- Member 2 -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_male2.jpg" alt="Member" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Member</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">IJ Rose Sarabia</p>
+
+                                <!-- Secretary -->
+                                <div class="group">
+                                    <div class="relative overflow-hidden rounded-lg">
+                                        <img 
+                                            src="/images/avatar_female.jpg" 
+                                            alt="Secretary" 
+                                            class="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute bottom-0 left-0 right-0 p-4">
+                                                <p class="text-white text-sm">Johann's Motto - Organizing with precision</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-center">
+                                        <h3 class="text-xl font-bold text-gray-900">Johann Nicole Delanon</h3>
+                                        <p class="text-blue-600 font-medium">Secretary</p>
+                                    </div>
                                 </div>
-                                <!-- Member 3 -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_male1.jpg" alt="Member" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Member</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Charlene Ubat</p>
-                                </div>
-                                <!-- Member 4 -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_male.jpg" alt="Member" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Member</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Jane Anonas</p>
-                                </div>
-                                <div class="text-center">
-                                    <img src="/images/avatar_male1.jpg" alt="Member" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Member</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Patrick Fiala</p>
-                                </div>
-                                <!-- Member 2 -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_male.jpg" alt="Member" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Member</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Lenard Tenefrancia</p>
-                                </div>
-                                <div class="text-center">
-                                    <img src="/images/avatar_female1.jpg" alt="Member" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Member</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Hazel Dizon</p>
+
+                                <!-- Treasurer -->
+                                <div class="group">
+                                    <div class="relative overflow-hidden rounded-lg">
+                                        <img 
+                                            src="/images/avatar_female1.jpg" 
+                                            alt="Treasurer" 
+                                            class="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute bottom-0 left-0 right-0 p-4">
+                                                <p class="text-white text-sm">Crystal's Motto - Managing resources effectively</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-center">
+                                        <h3 class="text-xl font-bold text-gray-900">Crystal Gabrielle Ungab</h3>
+                                        <p class="text-blue-600 font-medium">Treasurer</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
