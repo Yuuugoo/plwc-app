@@ -23,9 +23,11 @@
 
     "navigation.home": "Home",
     "navigation.about": "About",
+        "navigation.about-mobile": "Main About",
         "navigation.about.mission-vision": "Mission & Vision",
         "navigation.about.history": "Church History",
     "navigation.groups": "Church Groupings",
+        "navigation.groups-mobile": "All Officers",
         "navigation.groups.elementary": "Elementary",
         "navigation.groups.highschool": "Highschool - 1st Year College",
         "navigation.groups.2nd-3rd": "2nd - 3rd Year College",
@@ -35,8 +37,8 @@
     "navigation.events": "Events",
     "navigation.gallery": "Gallery",
 
-    "footer.contact": "문의하기",
-    "footer.location": "우리 위치",
+    "footer.contact": "Contact Us",
+    "footer.location": "Our Location",
 
 
     "currentMonth": {

@@ -198,7 +198,7 @@
                     :active="route().current('home')"
                     class="mobile-nav-link"
                 >
-                    Home
+                {{ $t('navigation.home') }}
                 </NavLink>
 
                 <div class="space-y-2">
@@ -206,7 +206,7 @@
                         @click="toggleDropdown('mobileAbout')"
                         class="mobile-nav-link w-full text-left flex justify-between items-center"
                     >
-                        <span>About</span>
+                        <span> {{ $t('navigation.about') }}</span>
                         <svg 
                             class="w-4 h-4 transition-transform duration-200"
                             :class="{ 'rotate-180': activeDropdown === 'mobileAbout' }"
@@ -225,19 +225,19 @@
                             :href="route('about')"
                             class="mobile-nav-link"
                         >
-                            Main About
+                        {{ $t('navigation.about-mobile') }}
                         </Link>
                         <Link 
                             :href="route('about.mission-vision')"
                             class="mobile-nav-link"
                         >
-                            Mission & Vision
+                        {{ $t('navigation.about.mission-vision') }}
                         </Link>
                         <Link 
                             :href="route('about.history')"
                             class="mobile-nav-link"
                         >
-                            Church History
+                        {{ $t('navigation.about.history') }}
                         </Link>
                     </div>
                 </div>
@@ -248,7 +248,7 @@
                         @click="toggleDropdown('mobileGroups')"
                         class="mobile-nav-link w-full text-left flex justify-between items-center"
                     >
-                        <span>Church Groupings</span>
+                        <span>{{ $t('navigation.groups') }}</span>
                         <svg 
                             class="w-4 h-4 transition-transform duration-200"
                             :class="{ 'rotate-180': activeDropdown === 'mobileGroups' }"
@@ -267,7 +267,7 @@
                             :href="route('group')"
                             class="mobile-nav-link"
                         >
-                            All Officers
+                        {{ $t('navigation.groups-mobile') }}
                         </Link>
                         <Link 
                             v-for="link in groupLinks"
@@ -275,7 +275,7 @@
                             :href="route(link.route)"
                             class="mobile-nav-link"
                         >
-                            {{ link.text }}
+                            {{ $t(link.text) }}
                         </Link>
                     </div>
                 </div>
@@ -285,7 +285,7 @@
                     :active="route().current('event')"
                     class="mobile-nav-link"
                 >
-                    Events
+                {{ $t('navigation.events') }}
                 </NavLink>
 
                 <NavLink 
@@ -293,7 +293,7 @@
                     :active="route().current('gallery')"
                     class="mobile-nav-link"
                 >
-                    Gallery
+                {{ $t('navigation.gallery') }}
                 </NavLink>
                 <div v-if="canLogin" class="flex ml-2 texl-lg font-semibold items-center space-x-4">
                     <Link
@@ -311,6 +311,7 @@
                         Log in
                     </Link>
                 </div>
+               <DropdownFlowbite />
             </div>
         </div>
     </nav>
@@ -323,6 +324,7 @@ import { initFlowbite } from 'flowbite';
 import NavLink from '@/Components/NavLink.vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import DropdownFlowbite from './DropdownFlowbite.vue';
+
 
 defineProps({
     canLogin: {

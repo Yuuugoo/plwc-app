@@ -1,9 +1,8 @@
 <template>
     <div class="relative">
+        
         <button 
-            id="dropdownHoverButton" 
-            data-dropdown-toggle="dropdownHover" 
-            data-dropdown-trigger="hover" 
+            @click="toggleDropdown" 
             class="text-black font-medium rounded-lg text-md px-5 py-2.5 text-center inline-flex items-center"
             type="button"
         >
@@ -13,7 +12,7 @@
             </svg>
         </button>
 
-        <div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+        <div v-if="isDropdownOpen" class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 absolute">
             <ul class="py-2 text-sm text-gray-700 font-medium" aria-labelledby="dropdownHoverButton">
                 <li>
                     <a 
@@ -48,17 +47,23 @@
 import { ref, onMounted } from 'vue';
 
 const currentLocale = ref('en'); 
+const isDropdownOpen = ref(false);
 
 const switchLanguage = (lang) => {
     if (currentLocale.value !== lang) {
         currentLocale.value = lang;
         localStorage.setItem('locale', lang);
-        window.location.reload(); // Reload only when language changes
+        window.location.reload();
     }
+};
+
+const toggleDropdown = () => {
+    isDropdownOpen.value = !isDropdownOpen.value;
 };
 
 onMounted(() => {
     const storedLocale = localStorage.getItem('locale') || 'en';
-    currentLocale.value = storedLocale; // Set the locale without calling switchLanguage
+    currentLocale.value = storedLocale;
 });
 </script>
+

@@ -26,9 +26,11 @@
 
     "navigation.home": "홈",
     "navigation.about": "소개",
+    "navigation.about-mobile": "주요 소개",
         "navigation.about.mission-vision": "사명과 비전",
         "navigation.about.history": "교회 역사",
     "navigation.groups": "교회 그룹",
+        "navigation.groups-mobile": "모든 임원",
         "navigation.groups.elementary": "초등학교",
         "navigation.groups.highschool": "고등학교 - 1학년 대학",
         "navigation.groups.2nd-3rd": "2학년 - 3학년 대학",
