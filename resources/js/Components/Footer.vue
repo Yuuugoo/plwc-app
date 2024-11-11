@@ -11,7 +11,7 @@
                 </div>
                 <!-- Contacts -->
                 <div class="text-center md:text-left">
-                    <h2 class="mb-6 text-l font-bold text-gray-900 uppercase dark:text-white">Contact Us</h2>
+                    <h2 class="mb-6 text-l font-bold text-gray-900 uppercase dark:text-white">{{ $t('footer.contact') }}</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <li class="mb-4">
                             <div class="flex items-center justify-center md:justify-start gap-2">
@@ -40,7 +40,7 @@
                 </div>
                 <!-- Location -->
                 <div class="w-full md:w-auto">
-                    <h2 class="mb-4 text-l font-bold text-gray-900 uppercase dark:text-white text-center md:text-left">Our Location</h2>
+                    <h2 class="mb-4 text-l font-bold text-gray-900 uppercase dark:text-white text-center md:text-left">{{ $t('footer.location') }}</h2>
                     <div class="flex justify-center md:justify-start">
                         <iframe
                         width="500"
@@ -64,23 +64,3 @@
             </div>
     </footer>
 </template>
-
-<script >
-export default {
-    name: 'App',
-    data() {
-        return {
-            center: {lat: 14.6998603, lng: 121.0633756},
-            markers: [
-            {
-                id: 'dfsldjl3r',
-                position: {
-                lat: 14.6998603, lng: 121.0633756
-                },
-            }
-            ],
-            zoom: 18,
-        }
-    }
-}
-</script>

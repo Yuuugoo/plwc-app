@@ -209,7 +209,7 @@ onUnmounted(() => {
                 <h3 class="text-2xl font-bold mb-2">{{ selectedEvent?.event_name }}</h3>
                 <p class="text-sm text-gray-600 mb-6">{{ selectedEvent?.event_description }}</p>
                 
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
                     <div 
                         v-for="(image, index) in parseImageUrls(selectedEvent?.image_url)" 
                         :key="index"
@@ -277,9 +277,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-.allura-font {
-    font-family: 'Allura', cursive;
-}
+
 
 @keyframes fadeIn {
     from { 

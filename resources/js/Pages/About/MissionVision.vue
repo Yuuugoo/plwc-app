@@ -119,41 +119,34 @@ onMounted(() => {
                         </h2>
                         <div class="mt-4 h-1 w-24 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div class="flex gap-4 items-start p-6 rounded-lg bg-white hover:shadow-xl transition-all duration-300">
-                            <div class="flex-none w-12 h-12 text-blue-600">
+                    <div class="grid md:grid-cols-3 gap-8 text-center">
+                        <div class="p-6 rounded-lg bg-gray-50 hover:shadow-xl transition-all duration-300">
+                            <div class="w-12 h-12 mx-auto mb-4 text-blue-600">
                                 <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                 </svg>
                             </div>
-                            <div>
-                                <h3 class="text-xl font-semibold mb-2">God-Centered</h3>
-                                <p class="text-gray-600">Grounding all we do in Biblical truth and spiritual growth.</p>
-                            </div>
+                            <h3 class="text-xl font-semibold mb-2">God-Centered</h3>
+                            <p class="text-gray-600">Share the message of Christ's love through worship, fellowship, and service.</p>
                         </div>
-                        <div class="flex gap-4 items-start p-6 rounded-lg bg-white hover:shadow-xl transition-all duration-300">
-                            <div class="flex-none w-12 h-12 text-blue-600">
+                        <div class="p-6 rounded-lg bg-gray-50 hover:shadow-xl transition-all duration-300">
+                            <div class="w-12 h-12 mx-auto mb-4 text-blue-600">
                                 <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                                 </svg>
                             </div>
-                            <div>
-                                <h3 class="text-xl font-semibold mb-2">Bible-Centered</h3>
-                                <p class="text-gray-600">Grounding all we do in Biblical truth and spiritual growth.</p>
-                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Bible-Centered</h3>
+                            <p class="text-gray-600">Create a welcoming environment where people can grow together in faith.</p>
                         </div>
-                        <div class="flex gap-4 items-start p-6 rounded-lg bg-white hover:shadow-xl transition-all duration-300">
-                            <div class="flex-none w-12 h-12 text-blue-600">
+                        <div class="p-6 rounded-lg bg-gray-50 hover:shadow-xl transition-all duration-300">
+                            <div class="w-12 h-12 mx-auto mb-4 text-blue-600">
                                 <svg class="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
                                 </svg>
                             </div>
-                            <div>
-                                <h3 class="text-xl font-semibold mb-2">Church-Centered</h3>
-                                <p class="text-gray-600">Grounding all we do in Biblical truth and spiritual growth.</p>
-                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Church-Centered</h3>
+                            <p class="text-gray-600">Reach out to those in need through meaningful service and support.</p>
                         </div>
-                        <!-- Add more core values here -->
                     </div>
                 </div>
             </div>
@@ -175,9 +168,4 @@ onMounted(() => {
     transform: translateY(0);
 }
 
-/* Optional: Add custom font for hero text */
-@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
-.allura-font {
-    font-family: 'Allura', cursive;
-}
 </style>

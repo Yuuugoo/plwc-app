@@ -17,7 +17,6 @@
                     </Link>
                 </div>
 
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
                     <Link
                         :href="route('home')"
@@ -25,7 +24,7 @@
                         class="nav-link"
                         :class="{ 'text-indigo-600': route().current('home') }"
                     >
-                        Home
+                        {{ $t('navigation.home') }}
                     </Link>
 
                     <div 
@@ -34,7 +33,7 @@
                         @mouseleave="closeAboutSubnav"
                     >
                         <Link :href="route('about')" :active="route().current('about')" class="flex text-lg font-semibold items-center space-x-1" :class="{ 'text-indigo-600': route().current('about') || route().current('about.mission-vision') || route().current('about.history') }">
-                            <span>About</span>
+                            <span>{{ $t('navigation.about') }}</span>
                             <svg 
                                 class="w-4 h-4 transition-transform duration-200"
                                 :class="{ 'rotate-180': showAboutSubnav }"
@@ -58,13 +57,13 @@
                                     :href="route('about.mission-vision')" 
                                     class="block px-4 py-2 text-lg font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
                                 >
-                                    Mission & Vision
+                                    {{ $t('navigation.about.mission-vision') }}
                                 </Link>
                                 <Link 
                                     :href="route('about.history')" 
                                     class="block px-4 py-2 text-lg font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
                                 >
-                                    Church History
+                                    {{ $t('navigation.about.history') }}
                                 </Link>
                             </div>
                         </Transition>
@@ -88,7 +87,7 @@
                                     route().current('group.parents')
                             }"
                         >
-                            <span>Church Groupings</span>
+                            <span>{{ $t('navigation.groups') }}</span>
                             <svg 
                                 class="w-4 h-4 transition-transform duration-200"
                                 :class="{ 'rotate-180': showGroupSubnav }"
@@ -114,7 +113,7 @@
                                     :href="route(link.route)"
                                     class="block px-4 py-2 text-lg font-semibold text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
                                 >
-                                    {{ link.text }}
+                                    {{ $t(link.text) }}
                                 </Link>
                             </div>
                         </Transition>
@@ -126,7 +125,7 @@
                         class="nav-link"
                         :class="{ 'text-indigo-600': route().current('event') }"
                     >
-                        Events
+                        {{ $t('navigation.events') }}
                     </Link>
 
                     <Link 
@@ -135,7 +134,7 @@
                         class="nav-link"
                         :class="{ 'text-indigo-600': route().current('gallery') }"
                     >
-                        Gallery
+                        {{ $t('navigation.gallery') }}
                     </Link>
 
                     <!-- Auth Buttons -->
@@ -155,6 +154,7 @@
                             Log in
                         </Link>
                     </div>
+                    <DropdownFlowbite />
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -322,6 +322,7 @@ import { onMounted, ref } from 'vue';
 import { initFlowbite } from 'flowbite';
 import NavLink from '@/Components/NavLink.vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import DropdownFlowbite from './DropdownFlowbite.vue';
 
 defineProps({
     canLogin: {
@@ -373,12 +374,14 @@ const toggleDropdown = (name) => {
 
 // Group links data
 const groupLinks = [
-    { route: 'group.highschool.1styear', text: 'High School - 1st Year College' },
-    { route: 'group.2ndyear.3rdyear', text: '2nd Year - 3rd Year College' },
-    { route: 'group.4thyear', text: '4th Year College' },
-    { route: 'group.youth', text: 'Youth' },
-    { route: 'group.parents', text: 'Parents' }
+    { route: 'group.elementary', text: 'navigation.groups.elementary' },
+    { route: 'group.highschool.1styear', text: 'navigation.groups.highschool' },
+    { route: 'group.2ndyear.3rdyear', text: 'navigation.groups.2nd-3rd' },
+    { route: 'group.4thyear', text: 'navigation.groups.4th' },
+    { route: 'group.youth', text: 'navigation.groups.youth' },
+    { route: 'group.parents', text: 'navigation.groups.parents' }
 ];
+
 
 // Lifecycle hooks
 onMounted(() => {

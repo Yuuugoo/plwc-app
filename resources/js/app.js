@@ -5,7 +5,7 @@ import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
-import VueGoogleMaps from '@fawmi/vue-google-maps';
+import { i18nVue } from 'laravel-vue-i18n'; 
 
 
 const appName = import.meta.env.VITE_APP_NAME || '';
@@ -17,12 +17,18 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
-            .use(VueGoogleMaps, {
-                load: {
-                    key: 'AIzaSyB7_O5viX6-eTise2y8B8DtAcIGJe6VjhE',
-                    libraries: 'places',
-                    loading: 'async',
-                },
+            .use(i18nVue, {
+                lang: localStorage.getItem('locale') || 'en',
+                resolve: async (lang) => {
+                    try {
+                        const langs = import.meta.glob('../../lang/*.json')
+                        return await langs[`../../lang/${lang}.json`]()
+                    } catch (error) {
+                        console.error(`Could not load language file: ${lang}`, error)
+                        const langs = import.meta.glob('../../lang/*.json')
+                        return await langs['../../lang/en.json']()
+                    }
+                }
             })
             .mount(el);
     },

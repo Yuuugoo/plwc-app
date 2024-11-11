@@ -1,0 +1,56 @@
+{
+    "languages.english": "English",
+    "languages.korean": "Korean",
+    "landing.title": "REVIVAL 30-200",
+    "landing.subtitle": "30 Groups, 200 Disciples",
+    "landing.quote": "'If you can?' said Jesus.",
+    "landing.quote_continued": "Everything is possible for one who believes.",
+    "landing.verse": "Mark 9:23",
+    "landing.sched.title": "Weekly Service Schedule",
+    "landing.sched.item1": "Worship",
+    "landing.sched.item1.time": "9:00 AM - 12:30 PM",
+    "landing.sched.item1.place": "Main Sanctuary",
+    "landing.sched.item2": "Group Meetings",
+    "landing.sched.item2.time": "01:00 PM - 02:00 PM ",
+    "landing.sched.item2.place": "Main Sanctuary",
+    "landing.sched.button": "Join Us This Week",
+    "landing.sched.image-span": "Join our community in worship",
+    "landing.newcomers.title": "Newcomers",
+    "landing.newcomers.description": "Meet our latest members and help us welcome them to the community! ",
+    "landing.newcomers.button": "View Newcomers",
+    "landing.events.title": "Upcoming Events for",
+
+
+    "navigation.home": "Home",
+    "navigation.about": "About",
+        "navigation.about.mission-vision": "Mission & Vision",
+        "navigation.about.history": "Church History",
+    "navigation.groups": "Church Groupings",
+        "navigation.groups.elementary": "Elementary",
+        "navigation.groups.highschool": "Highschool - 1st Year College",
+        "navigation.groups.2nd-3rd": "2nd - 3rd Year College",
+        "navigation.groups.4th": "4th Year College",
+        "navigation.groups.youth": "Youth",
+        "navigation.groups.parents": "Parents",
+    "navigation.events": "Events",
+    "navigation.gallery": "Gallery",
+
+    "footer.contact": "문의하기",
+    "footer.location": "우리 위치",
+
+
+    "currentMonth": {
+        "january": "January",
+        "february": "February",
+        "march": "March",
+        "april": "April",
+        "may": "May",
+        "june": "June",
+        "july": "July",
+        "august": "August",
+        "september": "September",
+        "october": "October",
+        "november": "November",
+        "december": "December"
+    }
+}

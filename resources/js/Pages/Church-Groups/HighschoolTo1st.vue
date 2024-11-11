@@ -11,45 +11,128 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Highschool - 1st Year College" />
+    <Head title="4th Year College" />
     <div class="flex flex-col min-h-screen">
         <LandingPageNav :canLogin="canLogin" />
         <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
-            <section class="flex justify-center items-center min-h-screen">
-                <div class="w-3/4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800" id="defaultTab" data-tabs-toggle="#defaultTabContent" role="tablist">
-                        <li class="me-2">
-                            <button id="officers-tab" data-tabs-target="#officers" type="button" role="tab" aria-controls="officers" aria-selected="true" class="inline-block p-4 text-blue-600 rounded-ss-lg hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-blue-500">Officers</button>
-                        </li>
-                    </ul>
-                    <div id="defaultTabContent">
-                        <!-- Officers Tab -->
-                        <div class="p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="officers" role="tabpanel" aria-labelledby="officers-tab">
-                            <h2 class="mb-5 text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">Highschool to 1st Year College Officers</h2>
-                            <div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+            <section class="py-16 px-4">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h1 class="text-4xl font-bold text-gray-900 mb-8 mt-28">Highschool - 1st Year Officers</h1>
+                    <div class="grid md:grid-cols-2 gap-8 mb-16">
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="h-16 w-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Our Mission</h2>
+                            <p class="text-gray-600 leading-relaxed">
+                                The High School to 1st year College is committed to creating a welcoming and inclusive church community where people from all walks of life feel comfortable gathering, sharing meals, and building lasting relationships. Our mission is to spread the gospel of Jesus Christ to students in a way that by building strong relationships and sharing our faith, we can help each other become more like Christ. We aim to have disciples of Christ and productive leaders who will then go out into the world and encourage people over to Christ. To glorify God's name, they must be brought to Christ-like maturity and prepared for their ministry in the church and their life's work in the world.
+                            </p>
+                        </div>
+
+                        <!-- Vision Card -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="h-16 w-16 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Our Vision</h2>
+                            <p class="text-gray-600 leading-relaxed">
+                                The High School to 1st year College envision our Group as a haven of warmth and welcome, where people from all walks of life can come together and feel at home. We aspire to a church where everyone is loved, where people find meaning, and where people's lives are transformed. We commit to being used by God to Rescue, Recover, and Restore those who have never known the Presence and Power of God, with one hand turned toward God and the other toward mankind.  We believe that by living out this vision, we can fulfill the Great Commission of Jesus Christ and bring glory to God. 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Officers Section -->
+            <section class="py-16 px-4">
+                <div class="max-w-6xl mx-auto">
+                    <div class="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
+                        <div class="p-8">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Meet Our Officers</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                                 <!-- President -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_male3.jpg" alt="President" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">President</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Sophia Elaine J. Ungab</p>
+                                <div class="group">
+                                    <div class="relative overflow-hidden rounded-lg">
+                                        <img 
+                                            src="/images/avatar_male3.jpg" 
+                                            alt="President" 
+                                            class="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute bottom-0 left-0 right-0 p-4">
+                                                <p class="text-white text-sm">Sophia's Descrition</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-center">
+                                        <h3 class="text-xl font-bold text-gray-900">Sophia Ungab</h3>
+                                        <p class="text-blue-600 font-medium">President</p>
+                                    </div>
                                 </div>
+
                                 <!-- Vice President -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_female2.jpg" alt="Vice President" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Vice President</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Norie Ann C. Timbal</p>
+                                <div class="group">
+                                    <div class="relative overflow-hidden rounded-lg">
+                                        <img 
+                                            src="/images/avatar_female2.jpg" 
+                                            alt="Vice President" 
+                                            class="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute bottom-0 left-0 right-0 p-4">
+                                                <p class="text-white text-sm">Norie's Descrition</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-center">
+                                        <h3 class="text-xl font-bold text-gray-900">Norie Ann Timbal</h3>
+                                        <p class="text-blue-600 font-medium">Vice President</p>
+                                    </div>
                                 </div>
+
                                 <!-- Secretary -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_female.jpg" alt="Secretary" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Secretary</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Rhea Mae M. Castro</p>
+                                <div class="group">
+                                    <div class="relative overflow-hidden rounded-lg">
+                                        <img 
+                                            src="/images/avatar_female.jpg" 
+                                            alt="Secretary" 
+                                            class="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute bottom-0 left-0 right-0 p-4">
+                                                <p class="text-white text-sm">Rhea's Descrition</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-center">
+                                        <h3 class="text-xl font-bold text-gray-900">Rhea Castro</h3>
+                                        <p class="text-blue-600 font-medium">Secretary</p>
+                                    </div>
                                 </div>
+
                                 <!-- Treasurer -->
-                                <div class="text-center">
-                                    <img src="/images/avatar_female1.jpg" alt="Treasurer" class="w-24 h-24 mx-auto mb-2 rounded-full">
-                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">Treasurer</h3>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Caridel S. Magalang </p>
+                                <div class="group">
+                                    <div class="relative overflow-hidden rounded-lg">
+                                        <img 
+                                            src="/images/avatar_female1.jpg" 
+                                            alt="Treasurer" 
+                                            class="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute bottom-0 left-0 right-0 p-4">
+                                                <p class="text-white text-sm">Caridel's Descrition</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-center">
+                                        <h3 class="text-xl font-bold text-gray-900">Caridel Magalang</h3>
+                                        <p class="text-blue-600 font-medium">Treasurer</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

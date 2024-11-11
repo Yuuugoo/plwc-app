@@ -156,7 +156,7 @@ Route::get('/gallery', function () {
 
 
 Route::get('/gallery/{gallery}', [GalleryController::class, 'show'])->name('gallery.show');
-Route::get('/new-friends/{newFriend}', [NewFriendController::class, 'show'])->name('new-friends.show');
+Route::get('/new-friends-all', [NewFriendController::class, 'show'])->name('new-friends.show');
 
 Route::get('/settings', function () {
     return Inertia::render('Settings');

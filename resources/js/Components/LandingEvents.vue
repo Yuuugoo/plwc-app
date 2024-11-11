@@ -63,9 +63,9 @@ const currentEvents = computed(() => {
 <template>
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6">
         <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-            Upcoming Events for {{ currentMonth }} <span>{{ currentYear }}</span>
+            {{ $t('landing.events.title') }} {{ currentMonth }} <span>{{ currentYear }}</span>
         </h2>
-        <!-- Changed from grid to flex and added overflow container -->
+       
         <div class="relative">
             <div class="flex overflow-x-auto pb-6 gap-6 snap-x">
                 <div v-for="event in currentEvents" :key="event.id" 

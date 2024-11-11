@@ -49,7 +49,7 @@ class NewFriendController extends Controller
     public function show(NewFriend $newFriend)
     {
         return Inertia::render('CRUD/NewFriendsShow', [
-            'friend' => $newFriend,
+            'friends' => NewFriend::latest()->get(),
             'canLogin' => Route::has('login'),
         ]);
     }
