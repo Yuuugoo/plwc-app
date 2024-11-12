@@ -11,7 +11,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="4th Year College" />
+    <Head title="Youth Officers" />
     <div class="flex flex-col min-h-screen">
         <LandingPageNav :canLogin="canLogin" />
         <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
@@ -20,8 +20,7 @@ defineProps({
                 <div class="max-w-6xl mx-auto text-center">
                     <h1 class="text-4xl font-bold text-gray-900 mb-8 mt-28">Youth Officers</h1>
                     <div class="grid md:grid-cols-2 gap-8 mb-16">
-                        <!-- Mission Card -->
-                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 animate-fadeInLeft">
                             <div class="h-16 w-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -29,12 +28,17 @@ defineProps({
                             </div>
                             <h2 class="text-2xl font-bold text-gray-900 mb-4">Our Mission</h2>
                             <p class="text-gray-600 leading-relaxed">
-                                To establish a Christ-centered student community where faith flourishes, leadership serves with humility, and every member grows in their relationship with God. We envision a campus where spiritual values guide academic pursuits, where students find strength in fellowship, and where God's love transforms lives through our service and example.
+                                We are a welcoming, Christ-centered group where we grow in faith, share the gospel, and serve as examples for others.
                             </p>
+                            <blockquote class="bg-gray-100 p-4 rounded-lg mt-4">
+                                <p class="text-gray-600 font-medium">
+                                    "In the same way, let your light shine before others, that they may see your good deeds and glorify your Father in heaven."
+                                </p>
+                                <cite class="text-gray-500 text-sm">— Matthew 5:16</cite>
+                            </blockquote>
                         </div>
 
-                        <!-- Vision Card -->
-                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 animate-fadeInRight">
                             <div class="h-16 w-16 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -43,12 +47,19 @@ defineProps({
                             </div>
                             <h2 class="text-2xl font-bold text-gray-900 mb-4">Our Vision</h2>
                             <p class="text-gray-600 leading-relaxed">
-                                To be recognized as a leading student organization that empowers future professionals, cultivates leadership, and creates lasting positive impact in our academic community.
+                                To inspire a generation passionate about Christ, eager to spread His love, and dedicated to building a vibrant church.
                             </p>
+                            <blockquote class="bg-gray-100 p-4 rounded-lg mt-4">
+                                <p class="text-gray-600 font-medium">
+                                    "Don’t let anyone look down on you because you are young, but set an example for the believers in speech, in conduct, in love, in faith and in purity."
+                                </p>
+                                <cite class="text-gray-500 text-sm">— 1 Timothy 4:12</cite>
+                            </blockquote>
                         </div>
                     </div>
                 </div>
             </section>
+
 
             <!-- Officers Section -->
             <section class="py-16 px-4">

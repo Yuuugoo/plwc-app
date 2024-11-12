@@ -11,7 +11,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="4th Year College" />
+    <Head title="Elementary Officers" />
     <div class="flex flex-col min-h-screen">
         <LandingPageNav :canLogin="canLogin" />
         <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
