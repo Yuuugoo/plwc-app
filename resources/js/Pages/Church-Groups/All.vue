@@ -134,7 +134,7 @@ const handleTabChange = (tabId) => {
 </script>
 
 <template>
-    <Head title="All Groups Members" />
+    <Head title="All Members" />
     <div class="flex flex-col min-h-screen">
         <LandingPageNav :canLogin="canLogin" />
         

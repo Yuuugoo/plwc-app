@@ -8,10 +8,10 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import { i18nVue } from 'laravel-vue-i18n'; 
 
 
-const appName = import.meta.env.VITE_APP_NAME || '';
+const appName = import.meta.env.VITE_APP_NAME || 'PLWC';
 
 createInertiaApp({
-    title: (title) => `${title} ${appName}`,
+    title: (title) => `${title} | ${appName}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })

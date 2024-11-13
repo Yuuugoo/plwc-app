@@ -101,29 +101,42 @@ onMounted(() => {
 
 <template>
     <Head title="Home" />
-    <div class="flex-grow flex-col min-h-screen overflow-hidden">
+    <div class="flex-grow flex-col overflow-hidden">
         <LandingPageNav :canLogin="canLogin" />
-        <div class="min-h-screen bg-cloud-bg bg-no-repeat bg-cover">
-            <section class="relative flex justify-center items-center min-h-screen transition-all duration-500"
-                    :class="{ 'scale-100 opacity-100': isCurrentSection(0), 'scale-95 opacity-70': !isCurrentSection(0) }">
-                    <div class="px-6 max-w-screen-2xl text-center mt-8 sm:mt-16 md:mt-48 mb-8 sm:mb-16 md:mb-36">
-                        <h1 class="mb-3 sm:mb-4 text-3xl sm:text-4xl md:text-6xl lg:text-9xl font-semibold tracking-tight leading-none text-gray-900 dark:text-white allura-font">
-                            {{ $t('landing.title') }}
-                        </h1>
-                        <h1 class="mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-5xl lg:text-9xl font-semibold tracking-tight leading-none text-gray-750 dark:text-white allura-font">
-                            {{ $t('landing.subtitle') }}
-                        </h1>
-                        <p class="text-sm sm:text-base md:text-xl lg:text-2xl font-medium text-gray-650 dark:text-gray-400">
-                            {{ $t('landing.quote') }}<br class="sm:hidden">
-                            "{{ $t('landing.quote_continued') }}"<br>
-                            {{ $t('landing.verse') }}
-                        </p>
-                    </div>
-                <div v-if="isNextSection(1)" class="absolute bottom-4 sm:bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce">
-                    <svg class="w-4 h-4 sm:w-6 sm:h-6 text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                        <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                    </svg>
-                </div>
+        <div class="bg-cloud-bg bg-no-repeat bg-cover">
+            <section 
+            class="relative flex justify-center items-center min-h-[calc(80vh-4rem)] lg:min-h-screen transition-all duration-500"
+            :class="{ 'scale-100 opacity-100': isCurrentSection(0), 'scale-95 opacity-70': !isCurrentSection(0) }"
+            >
+            <div class="px-6 max-w-screen-2xl text-center py-16 md:mt-48 md:mb-36">
+                <h1 class="mb-3 sm:mb-4 text-5xl sm:text-4xl md:text-6xl lg:text-9xl font-semibold tracking-tight leading-none text-gray-900 dark:text-white allura-font">
+                {{ $t('landing.title') }}
+                </h1>
+                <h1 class="mb-4 sm:mb-6 text-4xl sm:text-3xl md:text-5xl lg:text-9xl font-semibold tracking-tight leading-none text-gray-750 dark:text-white allura-font">
+                {{ $t('landing.subtitle') }}
+                </h1>
+                <p class="text-lg sm:text-base md:text-xl lg:text-2xl font-medium text-gray-650 dark:text-gray-400">
+                {{ $t('landing.quote') }}<br class="sm:hidden">
+                "{{ $t('landing.quote_continued') }}"<br>
+                {{ $t('landing.verse') }}
+                </p>
+            </div>
+            <div 
+                v-if="isNextSection(1)" 
+                class="absolute bottom-4 sm:bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce"
+            >
+                <svg 
+                class="w-4 h-4 sm:w-6 sm:h-6 text-gray-700" 
+                fill="none" 
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                stroke-width="2" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+                >
+                <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
             </section>
         </div>
 

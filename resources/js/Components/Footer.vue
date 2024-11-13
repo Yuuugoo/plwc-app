@@ -6,10 +6,9 @@
                 <!-- Footer Logo -->
                 <div class="flex justify-center md:justify-start">
                     <a href="/" class="flex items-center">
-                        <img src="/images/plwc-logo.png" class="h-16 w-24 lg:h-36 lg:w-full" alt="PLWC LOGO">
+                        <img src="/images/plwc-logo.png" class="h-16 w-24 lg:h-36 lg:w-full" alt="PLWC | Philippine Lake-Wood Church">
                     </a>
                 </div>
-                <!-- Contacts -->
                 <div class="text-center md:text-left">
                     <h2 class="mb-6 text-l font-bold text-gray-900 uppercase dark:text-white">{{ $t('footer.contact') }}</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
