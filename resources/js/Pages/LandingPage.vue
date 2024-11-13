@@ -105,7 +105,7 @@ onMounted(() => {
         <LandingPageNav :canLogin="canLogin" />
         <div class="bg-cloud-bg bg-no-repeat bg-cover">
             <section 
-            class="relative flex justify-center items-center min-h-[calc(80vh-4rem)] lg:min-h-screen transition-all duration-500"
+            class="relative flex justify-center items-center min-h-[calc(87vh-4rem)] lg:min-h-screen transition-all duration-500"
             :class="{ 'scale-100 opacity-100': isCurrentSection(0), 'scale-95 opacity-70': !isCurrentSection(0) }"
             >
             <div class="px-6 max-w-screen-2xl text-center py-16 md:mt-48 md:mb-36">
