@@ -103,7 +103,7 @@ onMounted(() => {
     <Head title="Home" />
     <div class="flex-grow flex-col overflow-hidden">
         <LandingPageNav :canLogin="canLogin" />
-        <div class="bg-cloud-bg bg-no-repeat bg-cover">
+        <main class="bg-cloud-bg bg-no-repeat bg-cover">
             <section 
             class="relative flex justify-center items-center min-h-[calc(87vh-4rem)] lg:min-h-screen transition-all duration-500"
             :class="{ 'scale-100 opacity-100': isCurrentSection(0), 'scale-95 opacity-70': !isCurrentSection(0) }"
@@ -138,7 +138,7 @@ onMounted(() => {
                 </svg>
             </div>
             </section>
-        </div>
+        </main>
 
         <div>
             <section class="relative flex flex-col sm:flex-row md:flex-row justify-between items-center px-4 md:px-10 lg:py-24 lg:mb-10 transition-all duration-500"
