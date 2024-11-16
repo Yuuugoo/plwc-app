@@ -18,7 +18,7 @@ defineProps({
             <!-- Mission/Vision Section -->
             <section class="py-16 px-4">
                 <div class="max-w-6xl mx-auto text-center">
-                    <h1 class="text-4xl font-bold text-gray-900 mb-8 mt-28">Elementary Officers</h1>
+                    <h1 class="text-4xl font-bold text-gray-900 mb-8 mt-28">Elementary Teachers</h1>
                     <div class="grid md:grid-cols-2 gap-8 mb-16">
                         <!-- Mission Card -->
                         <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -67,13 +67,13 @@ defineProps({
                                         />
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute bottom-0 left-0 right-0 p-4">
-                                                <p class="text-white text-sm">Jovi's Motto - Leading with vision and dedication</p>
+                                                <p class="text-white text-sm">Samonim's Short Description</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mt-4 text-center">
-                                        <h3 class="text-xl font-bold text-gray-900">Jovi Dela Cruz</h3>
-                                        <p class="text-blue-600 font-medium">President</p>
+                                        <h3 class="text-xl font-bold text-gray-900">Samonim</h3>
+                                        <p class="text-blue-600 font-medium">Elementary President</p>
                                     </div>
                                 </div>
 
@@ -87,13 +87,13 @@ defineProps({
                                         />
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute bottom-0 left-0 right-0 p-4">
-                                                <p class="text-white text-sm">Aileen's Motto - Supporting progress and innovation</p>
+                                                <p class="text-white text-sm">Vanessa's Description</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mt-4 text-center">
-                                        <h3 class="text-xl font-bold text-gray-900">Aileen Marfil</h3>
-                                        <p class="text-blue-600 font-medium">Vice President</p>
+                                        <h3 class="text-xl font-bold text-gray-900">Vanessa</h3>
+                                        <p class="text-blue-600 font-medium">Grade 5-6 Teacher</p>
                                     </div>
                                 </div>
 
@@ -107,13 +107,13 @@ defineProps({
                                         />
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute bottom-0 left-0 right-0 p-4">
-                                                <p class="text-white text-sm">Johann's Motto - Organizing with precision</p>
+                                                <p class="text-white text-sm">Angela's Description</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mt-4 text-center">
-                                        <h3 class="text-xl font-bold text-gray-900">Johann Nicole Delanon</h3>
-                                        <p class="text-blue-600 font-medium">Secretary</p>
+                                        <h3 class="text-xl font-bold text-gray-900">Angela</h3>
+                                        <p class="text-blue-600 font-medium">Grade 3-4 Teacher</p>
                                     </div>
                                 </div>
 
@@ -127,13 +127,32 @@ defineProps({
                                         />
                                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <div class="absolute bottom-0 left-0 right-0 p-4">
-                                                <p class="text-white text-sm">Crystal's Motto - Managing resources effectively</p>
+                                                <p class="text-white text-sm">Feonah's Description</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mt-4 text-center">
-                                        <h3 class="text-xl font-bold text-gray-900">Crystal Gabrielle Ungab</h3>
-                                        <p class="text-blue-600 font-medium">Treasurer</p>
+                                        <h3 class="text-xl font-bold text-gray-900">Feonah</h3>
+                                        <p class="text-blue-600 font-medium">Grade 1-2 Teacher</p>
+                                    </div>
+                                </div>
+
+                                <div class="group">
+                                    <div class="relative overflow-hidden rounded-lg">
+                                        <img 
+                                            src="/images/avatar_female1.jpg" 
+                                            alt="Treasurer" 
+                                            class="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div class="absolute bottom-0 left-0 right-0 p-4">
+                                                <p class="text-white text-sm">Juvilyn's Description</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-center">
+                                        <h3 class="text-xl font-bold text-gray-900">Juvilyn</h3>
+                                        <p class="text-blue-600 font-medium">Assistant Teacher</p>
                                     </div>
                                 </div>
                             </div>

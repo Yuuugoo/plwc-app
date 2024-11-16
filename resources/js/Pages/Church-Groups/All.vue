@@ -10,11 +10,23 @@ defineProps({
     },
 });
 
-const activeTab = ref('Highschool');
+const activeTab = ref('Elementary');
 const itemsPerPage = 5;
 const currentPage = ref(1);
 
 const groupData = {
+    Elementary: [
+        { name: 'Samonim', role: 'Elementary President' },
+        { name: 'Vanessa', role: 'Grade 5-6 Teacher' },
+        { name: 'Angela', role: 'Grade 3-4 Teacher' },
+        { name: 'Feonah', role: 'Grade 1-2 Teacher' },
+        { name: 'Juvilyn', role: 'Assistant Teacher' },
+        { name: 'Patricia Wilson', role: 'Member' },
+        { name: 'Daniel Jones', role: 'Member' },
+        { name: 'Sophia Davis', role: 'Member' },
+        { name: 'Andrew Garcia', role: 'Member' },
+        { name: 'Emily Martinez', role: 'Member' },
+    ],
     Highschool: [
         { name: 'Sophia Elaine J. Ungab', role: 'President' },
         { name: 'Norie Ann C. Timbal', role: 'Vice President' },
@@ -78,6 +90,7 @@ const groupData = {
 };
 
 const tabs = [
+    { id: 'Elementary', label: 'Elementary' },
     { id: 'Highschool', label: 'Highschool - 1st Year College' },
     { id: 'College2nd', label: '2nd Year - 3rd Year College' },
     { id: 'College4th', label: '4th Year College' },
@@ -121,6 +134,16 @@ const getRoleColor = (role) => {
             return 'bg-green-100 text-green-800';
         case 'Treasurer':
             return 'bg-orange-100 text-orange-800';
+        case 'Elementary President':
+            return 'bg-blue-100 text-blue-800';
+        case 'Grade 5-6 Teacher':
+            return 'bg-purple-100 text-purple-800';
+        case 'Grade 3-4 Teacher':
+            return 'bg-green-100 text-green-800';
+        case 'Grade 1-2 Teacher':
+            return 'bg-orange-100 text-orange-800';
+        case 'Assistant Teacher':
+            return 'bg-indigo-100 text-indigo-800';
         default:
             return 'bg-gray-100 text-gray-800';
     }
@@ -141,8 +164,8 @@ const handleTabChange = (tabId) => {
         <main class="flex-grow bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mt-20 mb-12">
-                    <h1 class="text-4xl font-bold text-gray-900 mb-4">Group Directory</h1>
-                    <p class="text-lg text-gray-600">Browse through our organization's various groups and members</p>
+                    <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ $t('groups.main-title') }}</h1>
+                    <p class="text-lg text-gray-600">{{ $t('groups.main-description' )}}</p>
                 </div>
 
                 <div class="backdrop-blur-sm bg-white/90 rounded-xl shadow-xl p-6">

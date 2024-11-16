@@ -52,10 +52,10 @@ const props = defineProps({
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mt-20">
                     <h1 class="text-4xl font-bold text-white sm:text-5xl lg:text-6xl animate-fade-in">
-                        Join Our Events
+                        {{ $t('events.hero-title') }}
                     </h1>
                     <p class="mt-4 text-xl text-blue-100 animate-fade-in-delayed">
-                        Discover upcoming activities and celebrations in our community
+                        {{ $t('events.hero-description') }}
                     </p>
                 </div>
             </div>

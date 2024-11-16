@@ -27,7 +27,8 @@
                         required
                     >
                         <option value="">Select Event Type</option>
-                        <option value="Church Main Events">Main Event</option>
+                        <option value="Dance Competition">Dance Competition</option>
+                        <option value="Sports Fest">Sports Fest</option>
                         <option value="Elementary">Elementary</option>
                         <option value="Highschool - 1st Year College">Highschool - 1st Year College</option>
                         <option value="2nd Year College - 3rd Year College">2nd Year College - 3rd Year College</option>

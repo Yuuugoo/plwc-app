@@ -22,7 +22,7 @@ const selectedGroup = ref('');
 const groupNames = computed(() => {
     const groups = new Set();
     props.events.event_images.forEach(image => {
-        if (image.group && image.group !== 'Main Event') {
+        if (image.group && !['SportsFest', 'Dance Competition'].includes(image.group)) {
             groups.add(image.group);
         }
     });
@@ -34,8 +34,13 @@ const showAllPhotos = () => {
     selectedGroup.value = '';
 };
 
-const showEventsPhotos = () => {
-    selectedCategory.value = 'events';
+const showSportsPhotos = () => {
+    selectedCategory.value = 'sportsFest';
+    selectedGroup.value = '';
+};
+
+const showDancePhotos = () => {
+    selectedCategory.value = 'danceCompetition';
     selectedGroup.value = '';
 };
 
@@ -51,8 +56,10 @@ const filterByGroup = (group) => {
 const filteredImages = computed(() => {
     if (selectedCategory.value === 'churchGroups' && selectedGroup.value) {
         return props.events.event_images.filter(image => image.group === selectedGroup.value);
-    } else if (selectedCategory.value === 'events') {
-        return props.events.event_images.filter(image => image.group === 'Main Event');
+    } else if (selectedCategory.value === 'sportsFest') {
+        return props.events.event_images.filter(image => image.group === 'Sports Fest');
+    } else if (selectedCategory.value === 'danceCompetition') {
+        return props.events.event_images.filter(image => image.group === 'Dance Competition');
     }
     return props.events.event_images;
 });
@@ -88,14 +95,25 @@ const filteredImages = computed(() => {
                         </button>
 
                         <button 
-                            @click="showEventsPhotos" 
+                            @click="showSportsPhotos" 
                             type="button" 
                             :class="[
                                 'border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 dark:border-blue-500 dark:hover:bg-blue-500 dark:focus:ring-blue-800', 
-                                selectedCategory === 'events' ? 'bg-blue-700 text-white' : 'bg-white text-blue-700 hover:text-white dark:bg-gray-900 dark:text-blue-500 dark:hover:text-white'
+                                selectedCategory === 'sportsFest' ? 'bg-blue-700 text-white' : 'bg-white text-blue-700 hover:text-white dark:bg-gray-900 dark:text-blue-500 dark:hover:text-white'
                             ]"
                         >
-                            Main Events Photos
+                            Sports Fest Photos
+                        </button>
+
+                        <button 
+                            @click="showDancePhotos" 
+                            type="button" 
+                            :class="[
+                                'border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 dark:border-blue-500 dark:hover:bg-blue-500 dark:focus:ring-blue-800', 
+                                selectedCategory === 'danceCompetition' ? 'bg-blue-700 text-white' : 'bg-white text-blue-700 hover:text-white dark:bg-gray-900 dark:text-blue-500 dark:hover:text-white'
+                            ]"
+                        >
+                            Dance Competition Photos
                         </button>
 
                         <button 
