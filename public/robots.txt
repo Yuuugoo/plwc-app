@@ -1,2 +1,10 @@
 User-agent: *
+<<<<<<< Updated upstream
 Allow: /
+=======
+Disallow: /private/
+
+User-agent: Googlebot
+Allow: /maps/
+
+>>>>>>> Stashed changes

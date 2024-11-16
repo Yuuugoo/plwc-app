@@ -408,7 +408,7 @@ onMounted(() => {
 }
 
 .btn-primary {
-    @apply px-4 py-2 rounded-lg bg-indigo-600 text-white text-lg font-semibold hover:bg-indigo-700 
+    @apply px-4 py-2 rounded-lg hidden bg-indigo-600 text-white text-lg font-semibold hover:bg-indigo-700 
     transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 
     focus:ring-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-600;
 }

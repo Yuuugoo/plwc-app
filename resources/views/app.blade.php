@@ -6,11 +6,12 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
         <!-- Primary Meta Tags -->
-        <title inertia>{{ config('app.name', 'PLWC') }}</title>
+        <title>{{ config('app.name', 'PLWC') }}</title>
         <meta name="title" content="{{ config('app.name', 'PLWC') }}">
         <meta name="description" content="Discover the Presbyterian faith at our church in the Philippines. We are a welcoming community dedicated to worship, discipleship, and outreach, fostering spiritual growth and compassion in Christ. Join us for inspiring services, Bible study, and fellowship.">
         <meta name="keywords" content="plwc, PLWC, Lake-Wood Church, Philippine Lake-Wood Church">
-        
+        <meta name="naver-site-verification" content="" />
+
         <!-- Open Graph / Facebook -->
         <!--
         <meta property="og:type" content="website">
