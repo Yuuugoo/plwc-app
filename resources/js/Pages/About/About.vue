@@ -21,7 +21,7 @@ defineProps({
             <section class="relative flex flex-col justify-center items-center h-full text-white">
                 <div class="mt-48 mb-48 py-12 px-6 mx-auto max-w-screen-lg text-center lg:py-20 space-y-8 z-10">
                     <h1 class="animate-fade-in-down mb-6 text-5xl font-extrabold tracking-tight leading-tight lg:text-7xl drop-shadow-lg allura-font">
-                        Welcome to Philippine <br>Lake-Wood Church
+                        {{ $t('about.hero-section')}}
                     </h1>
                     <p class="animate-fade-in-up mb-6 text-lg font-light lg:text-xl sm:px-8 lg:px-20">
                         Our church has been a beacon of hope and faith in this community for over 14 years. Join us as we share the love of God and strive to make a positive impact in the world.
@@ -30,7 +30,6 @@ defineProps({
             </section>
         </div>
 
-        <!-- Pastor Section -->
         <section class="py-20 bg-gray-100">
             <div class="container mx-auto px-4">
                 <h2 class="animate-on-scroll text-4xl font-bold mb-12 text-center allura-font">Meet Our Pastor</h2>

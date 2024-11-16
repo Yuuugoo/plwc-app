@@ -100,7 +100,14 @@ onMounted(() => {
 </script>
 
 <template>
-    <Head title="Home" />
+    <Head>
+        <title>Philippine Lake-Wood Church | Welcome to Our Community</title>
+        <meta
+            name="description"
+            content="Join us for worship, fellowship & growth."
+            head-key="description"
+        />
+    </Head>
     <div class="flex-grow flex-col overflow-hidden">
         <LandingPageNav :canLogin="canLogin" />
         <main class="bg-cloud-bg bg-no-repeat bg-cover">
@@ -218,7 +225,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
 
 .animate-bounce {
     animation: bounce 1s infinite;

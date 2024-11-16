@@ -11,24 +11,52 @@ const props = defineProps({
         required: true,
     },
 });
-console.log(props.events);
+
 const selectedEventType = ref('All');
+const selectedYear = ref('All');
 const showModal = ref(false);
 const showImageViewer = ref(false);
 const selectedEvent = ref(null);
 const currentImageIndex = ref(0);
 
+// Compute unique event types
 const eventTypes = computed(() => {
     const types = new Set(props.events.map(event => event.event_type));
     return ['All', ...Array.from(types)];
 });
 
-const filteredEvents = computed(() => {
-    if (selectedEventType.value === 'All') {
-        return props.events;
-    }
-    return props.events.filter(event => event.event_type === selectedEventType.value);
+// Compute unique years from event dates
+const eventYears = computed(() => {
+    const years = new Set(props.events.map(event => {
+        const date = new Date(event.created_at);
+        // Check if the date is valid before getting the year
+        return !isNaN(date.getTime()) ? date.getFullYear().toString() : null;
+    }).filter(year => year !== null)); // Remove any null values
+    return ['All', ...Array.from(years).sort((a, b) => b.localeCompare(a))];
 });
+
+// Filter events based on both type and year
+const filteredEvents = computed(() => {
+    return props.events.filter(event => {
+        const date = new Date(event.created_at);
+        const eventYear = !isNaN(date.getTime()) ? date.getFullYear().toString() : null;
+        const matchesType = selectedEventType.value === 'All' || event.event_type === selectedEventType.value;
+        const matchesYear = selectedYear.value === 'All' || eventYear === selectedYear.value;
+        return matchesType && matchesYear;
+    });
+});
+
+// Add this helper function with your other functions in the script section
+const formatEventYear = (dateString) => {
+    try {
+        const date = new Date(dateString);
+        return !isNaN(date.getTime()) ? date.getFullYear() : '-';
+    } catch {
+        return '-';
+    }
+};
+
+console.log(props.events);
 
 const parseImageUrls = (imageUrlString) => {
     try {
@@ -107,17 +135,16 @@ onUnmounted(() => {
     <div class="flex flex-col min-h-screen">
         <LandingPageNav :canLogin="canLogin" />
         
-        <!-- Hero Section -->
         <div class="relative h-[70vh] overflow-hidden">
             <div class="absolute inset-0 bg-cloud-bg bg-cover bg-center bg-fixed"></div>
             <div class="absolute inset-0 bg-black/40"></div>
             <div class="relative flex items-center justify-center h-full text-center px-4">
                 <div class="max-w-4xl">
                     <h1 class="mb-6 text-6xl font-extrabold text-white allura-font animate-fade-in">
-                        Moments of Faith and Fellowship
+                        {{ $t('gallery.hero-title') }}
                     </h1>
                     <p class="text-xl font-medium text-gray-200 max-w-2xl mx-auto leading-relaxed animate-fade-in-delayed">
-                        "not giving up meeting together, as some are in the habit of doing, but encouraging one another—and all the more as you see the Day approaching."
+                        {{ $t('gallery.hero-description') }}
                     </p>
                     <p class="text-lg font-medium text-gray-300 mt-2 animate-fade-in-delayed">
                         Hebrews 10:24-25
@@ -129,21 +156,45 @@ onUnmounted(() => {
         <!-- Gallery Section -->
         <div class="bg-gray-50 min-h-screen py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Filter Buttons -->
-                <div class="flex items-center justify-center space-x-2 mb-12 overflow-x-auto pb-4">
-                    <button 
-                        v-for="type in eventTypes"
-                        :key="type"
-                        @click="selectedEventType = type" 
-                        class="transition-all duration-300 ease-in-out px-6 py-2.5 rounded-full text-sm font-medium"
-                        :class="[
-                            selectedEventType === type 
-                                ? 'bg-blue-600 text-white shadow-lg scale-105' 
-                                : 'bg-white text-gray-700 hover:bg-gray-100 hover:scale-105'
-                        ]"
-                    >
-                        {{ type }}
-                    </button>
+                <!-- Filter Section -->
+                <div class="flex flex-col items-center justify-center space-y-6 mb-12">
+                    <!-- Event Type Buttons -->
+                    <div class="flex items-center justify-center space-x-2 overflow-x-auto pb-4 w-full">
+                        <button 
+                            v-for="type in eventTypes"
+                            :key="type"
+                            @click="selectedEventType = type" 
+                            class="transition-all duration-300 ease-in-out px-6 py-2.5 rounded-full text-sm font-medium"
+                            :class="[
+                                selectedEventType === type 
+                                    ? 'bg-blue-600 text-white shadow-lg scale-105' 
+                                    : 'bg-white text-gray-700 hover:bg-gray-100 hover:scale-105'
+                            ]"
+                        >
+                            {{ type }}
+                        </button>
+                    </div>
+
+                    <!-- Year Filter Dropdown -->
+                    <div class="relative w-48">
+                        <select
+                            v-model="selectedYear"
+                            class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none cursor-pointer"
+                        >
+                            <option 
+                                v-for="year in eventYears" 
+                                :key="year"
+                                :value="year"
+                            >
+                                {{ year === 'All' ? 'All Years' : year }}
+                            </option>
+                        </select>
+                        <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Gallery Grid -->
@@ -182,6 +233,7 @@ onUnmounted(() => {
                             <h3 class="text-xl font-semibold mb-1">{{ event.event_name }}</h3>
                             <div class="flex items-center space-x-2 text-sm opacity-80">
                                 <span>{{ event.event_type }}</span>
+                                <span>• {{ formatEventYear(event.created_at) }}</span>
                                 <span v-if="getAdditionalImagesCount(event) > 0" class="ml-2">
                                     +{{ getAdditionalImagesCount(event) }} more photos
                                 </span>
@@ -234,7 +286,6 @@ onUnmounted(() => {
             @click.self="closeImageViewer"
         >
             <div class="relative w-full h-full flex items-center justify-center">
-                <!-- Close button -->
                 <button 
                     @click="closeImageViewer"
                     class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-50 text-4xl"
@@ -242,7 +293,6 @@ onUnmounted(() => {
                     ×
                 </button>
 
-                <!-- Navigation buttons -->
                 <button 
                     @click.stop="previousImage"
                     class="absolute left-4 text-white hover:text-gray-300 transition-colors text-6xl"
@@ -256,7 +306,6 @@ onUnmounted(() => {
                     ›
                 </button>
 
-                <!-- Main image -->
                 <div class="w-full h-full p-8 flex items-center justify-center">
                     <img 
                         :src="`/storage/${parseImageUrls(selectedEvent?.image_url)[currentImageIndex]}`"
@@ -265,7 +314,6 @@ onUnmounted(() => {
                     >
                 </div>
 
-                <!-- Image counter -->
                 <div class="absolute bottom-4 left-0 right-0 text-center text-white">
                     {{ currentImageIndex + 1 }} / {{ parseImageUrls(selectedEvent?.image_url).length }}
                 </div>
@@ -277,8 +325,6 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-
-
 @keyframes fadeIn {
     from { 
         opacity: 0; 

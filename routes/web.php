@@ -145,6 +145,7 @@ Route::get('/gallery', function () {
             'event_description' => $event->event_description,
             'image_url' => $event->event_images ? asset('storage/' . $event->event_images) : null,
             'event_type' => $event->event_type,
+            'created_at' => $event->created_at->format('Y-m-d H:i:s'),
         ];
     });
 
