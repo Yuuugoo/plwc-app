@@ -13,7 +13,7 @@
                 <div class="flex items-center">
                     <Link href="/" class="flex items-center space-x-2">
                         <ApplicationLogo class="h-14 lg:h-20 w-auto"/>
-                        <img src="/images/plwc_logo_black.png" class="h-12 w-auto hidden lg-small:block" alt="PLWC LOGO" />
+                        <img src="/images/plwc_logo_black.png" class="h-12 w-auto hidden lg-laptop:block" alt="PLWC LOGO" />
                     </Link>
                 </div>
 
