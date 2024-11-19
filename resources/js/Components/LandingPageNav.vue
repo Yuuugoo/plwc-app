@@ -3,7 +3,7 @@
         class="fixed w-full z-50 transition-all duration-300 lg:p-6 p-1"
         :class="[
             isScrolled 
-                ? 'bg-white/90 backdrop-blur-md shadow-lg dark:bg-gray-900/90' 
+                ? 'bg-white/90 backdrop-blur-md shadow-lg' 
                 : 'bg-transparent hover:bg-white/90 hover:backdrop-blur-md hover:shadow-lg'
         ]"
     >
@@ -12,8 +12,8 @@
                 <!-- Logo Section -->
                 <div class="flex items-center">
                     <Link href="/" class="flex items-center space-x-2">
-                        <ApplicationLogo class="h-10 lg:h-20 w-auto"/>
-                        <img src="/images/plwc_logo_black.png" class="h-12 w-auto hidden lg:block md:hidden" alt="PLWC LOGO" />
+                        <ApplicationLogo class="h-14 lg:h-20 w-auto"/>
+                        <img src="/images/plwc_logo_black.png" class="h-12 w-auto hidden lg-small:block" alt="PLWC LOGO" />
                     </Link>
                 </div>
 
@@ -160,7 +160,7 @@
                 <!-- Mobile Menu Button -->
                 <button 
                     @click="isMobileMenuOpen = !isMobileMenuOpen"
-                    class="md:hidden rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none"
+                    class="md:hidden rounded-lg p-2 hover:bg-gray-100 focus:outline-none"
                 >
                     <svg 
                         class="h-6 w-6" 
@@ -190,7 +190,7 @@
         <!-- Mobile Menu -->
         <div 
             v-show="isMobileMenuOpen"
-            class="md:hidden bg-white dark:bg-gray-800 shadow-lg rounded-lg"
+            class="md:hidden bg-white shadow-lg rounded-lg"
         >
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <NavLink 
@@ -374,7 +374,6 @@ const toggleDropdown = (name) => {
     activeDropdown.value = activeDropdown.value === name ? null : name;
 };
 
-// Group links data
 const groupLinks = [
     { route: 'group.elementary', text: 'navigation.groups.elementary' },
     { route: 'group.highschool.1styear', text: 'navigation.groups.highschool' },
@@ -384,8 +383,6 @@ const groupLinks = [
     { route: 'group.parents', text: 'navigation.groups.parents' }
 ];
 
-
-// Lifecycle hooks
 onMounted(() => {
     initFlowbite();
     
@@ -398,18 +395,18 @@ onMounted(() => {
 <style scoped>
 .nav-link {
     @apply hover:text-indigo-600 text-lg font-semibold transition-colors duration-200
-    dark:text-gray-200 dark:hover:text-indigo-400;
+   
 }
 
 .mobile-nav-link {
     @apply block px-3 py-2 rounded-md text-lg font-semibold text-gray-700 hover:text-indigo-600 
     hover:bg-gray-50 transition-colors duration-200
-    dark:text-gray-200 dark:hover:text-indigo-400 dark:hover:bg-gray-700;
+   
 }
 
 .btn-primary {
     @apply px-4 py-2 rounded-lg hidden bg-indigo-600 text-white text-lg font-semibold hover:bg-indigo-700 
     transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 
-    focus:ring-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-600;
+    focus:ring-indigo-500
 }
 </style>

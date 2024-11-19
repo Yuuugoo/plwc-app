@@ -1,11 +1,11 @@
 <template>
     <div class="max-w-xl mx-auto">
-        <div class="overflow-hidden bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 dark:bg-gray-800">
+        <div class="overflow-hidden bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300">
             <div class="flex flex-col md:flex-row">
                 <div class="relative w-full md:w-72">
                     <div class="absolute inset-0 bg-black/20"></div>
                     <img 
-                        src="images/worship1_bg.jpg" 
+                        src="images/worship1_bg.webp" 
                         alt="Worship Service" 
                         class="h-full w-full object-cover"
                     />
@@ -18,17 +18,17 @@
                 
                 <div class="p-10 md:p-6 ">
                     <div class="flex items-center gap-2 mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{ $t('landing.sched.title') }}</h2>
+                        <h2 class="text-2xl font-bold text-gray-900">{{ $t('landing.sched.title') }}</h2>
                     </div>
 
                     <!-- Schedule Items -->
                     <div class="space-y-6">
                         <div class="schedule-item">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{{ $t('landing.sched.item1') }}</h3>
-                            <div class="flex items-center text-gray-600 dark:text-gray-300 space-x-4">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ $t('landing.sched.item1') }}</h3>
+                            <div class="flex items-center text-gray-600 space-x-4">
                                 <span class="inline-flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -46,8 +46,8 @@
                         </div>
 
                         <div class="schedule-item">
-                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{{ $t('landing.sched.item2') }}</h3>
-                            <div class="flex items-center text-gray-600 dark:text-gray-300 space-x-4">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ $t('landing.sched.item2') }}</h3>
+                            <div class="flex items-center text-gray-600 space-x-4">
                                 <span class="inline-flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -66,9 +66,9 @@
                     </div>
 
 
-                    <button class="mt-8 w-full bg-blue-700 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                    <!-- <button class="mt-8 w-full bg-blue-700 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-0.5">
                         {{ $t('landing.sched.button') }}
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </div>
@@ -77,7 +77,7 @@
 
 <style scoped>
 .schedule-item {
-@apply relative pl-4 border-l-2 border-indigo-200 dark:border-indigo-800;
+@apply relative pl-4 border-l-2 border-indigo-200
 }
 
 .schedule-item::before {

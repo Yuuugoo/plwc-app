@@ -13,11 +13,14 @@ module.exports = {
 
     theme: {
         extend: {
+            screens: {
+                'lg-laptop': '1366px',
+              },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             backgroundImage: {
-                'cloud-bg': "url('/images/clouds_bg.png')",
+                'cloud-bg': "url('/images/clouds_bg.webp')",
                 'plwc-bg': "url('/images/bg1.jpg')",
                 'worship-bg': "url('/images/worship_bg.jpg')",
             }

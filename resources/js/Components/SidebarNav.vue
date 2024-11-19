@@ -1,25 +1,25 @@
 <template>
     <aside
         id="logo-sidebar"
-        class="fixed top-0 hidden sm:block left-0 z-40 w-64 h-screen pt-8 transition-transform bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+        class="fixed top-0 hidden sm:block left-0 z-40 w-64 h-screen pt-8 transition-transform bg-white border-r border-gray-200"
         aria-label="Sidebar"
     >
         <!-- Logo -->
         <div class="px-6 pb-4">
             <Link :href="route('home')" class="flex justify-center items-center mb-6">
-                <ApplicationLogo class="block h-10 lg:h-20 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                <ApplicationLogo class="block h-10 lg:h-20 w-auto fill-current text-gray-800" />
             </Link>
         </div>
 
         <!-- Navigation Links -->
-        <div class="h-full px-6 overflow-y-auto bg-white dark:bg-gray-800">
+        <div class="h-full px-6 overflow-y-auto bg-white">
             <ul class="space-y-4 font-medium">
                 <!-- Dashboard -->
                 <li>
                     <DashboardNavLink
                         :href="route('dashboard')"
                         :active="route().current('dashboard')"
-                        class="flex items-center p-3 w-full text-gray-900 rounded-lg bg-blue-600 hover:bg-blue-700 hover:text-white dark:text-white dark:hover:bg-gray-700 group"
+                        class="flex items-center p-3 w-full text-gray-900 rounded-lg bg-blue-600 hover:bg-blue-700 hover:text-white group"
                     >
                     
                         <span class="ml-3">Dashboard</span>
@@ -50,7 +50,7 @@
                             <DashboardNavLink
                                 :href="route('gallery.index')"
                                 :active="route().current('gallery.index')"
-                                class="flex items-center p-2 w-full rounded-lg bg-blue-600 hover:bg-green-600 dark:text-white group"
+                                class="flex items-center p-2 w-full rounded-lg bg-blue-600 hover:bg-green-600 group"
                             >
                                 <span class="ml-3">Gallery</span>
                             </DashboardNavLink>
@@ -59,7 +59,7 @@
                             <DashboardNavLink
                                 :href="route('new-friends')"
                                 :active="route().current('new-friends')"
-                                class="flex items-center p-2 w-full text-white rounded-lg bg-blue-600 hover:bg-green-600 dark:text-white dark:hover:bg-gray-700 group"
+                                class="flex items-center p-2 w-full text-white rounded-lg bg-blue-600 hover:bg-green-600 group"
                             >
                                 <span class="ml-3">New Friends</span>
                             </DashboardNavLink>
@@ -70,7 +70,7 @@
                     <DashboardNavLink
                         :href="route('settings')"
                         :active="route().current('settings')"
-                        class="flex items-center p-3 w-full text-gray-900 rounded-lg bg-blue-600 hover:bg-blue-700 hover:text-white dark:text-white dark:hover:bg-gray-700 group"
+                        class="flex items-center p-3 w-full text-gray-900 rounded-lg bg-blue-600 hover:bg-blue-700 hover:text-white group"
                     >
                     
                         <span class="ml-3">Settings</span>

@@ -1,6 +1,5 @@
 import './bootstrap';
 import '../css/app.css';
-import 'flowbite';
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -9,6 +8,8 @@ import { i18nVue } from 'laravel-vue-i18n';
 
 
 const appName = import.meta.env.VITE_APP_NAME || 'PLWC';
+
+
 
 createInertiaApp({
     title: (title) => `${title} | ${appName}`,

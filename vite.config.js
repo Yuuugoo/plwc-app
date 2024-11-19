@@ -7,6 +7,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: 'resources/js/app.js',
+            ssr: 'resources/js/ssr.js',
             refresh: true,
         }),
         vue({
@@ -17,13 +18,9 @@ export default defineConfig({
                 },
             },
         }),
-        i18n()
+        i18n(),
+        
     ],
-    resolve: {
-        alias: {
-            vue: 'vue/dist/vue.esm-bundler.js',
-        },
-    },
     optimizeDeps: {
         include: ['@fawmi/vue-google-maps', 'fast-deep-equal']
     },

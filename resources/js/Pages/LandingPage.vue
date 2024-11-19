@@ -3,7 +3,6 @@ import { ref, onMounted, computed, onUnmounted } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import LandingPageNav from '@/Components/LandingPageNav.vue';
 import Footer from '@/Components/Footer.vue';
-import { Link } from '@inertiajs/vue3';
 import FriendsCard from '@/Components/FriendsCard.vue';
 import LandingEvents from '@/Components/LandingEvents.vue';
 import { useParallax, useScroll } from '@vueuse/core';
@@ -25,79 +24,79 @@ const props = defineProps({
     },
 });
 
-
 const isVisibleCard = ref(false);
 const isVisibleTimeSched = ref(false);
 const isVisibleEvents = ref(false);
-
 const cardRef = ref(null);
 const timeSchedRef = ref(null);
 const eventsRef = ref(null);
-
 const sections = ref([]);
 const currentSectionIndex = ref(0);
-
-const { y: scrollY } = useScroll(window);
-
-const updateCurrentSection = () => {
-    const scrollPosition = scrollY.value + window.innerHeight / 2;
-    for (let i = 0; i < sections.value.length; i++) {
-        const section = sections.value[i];
-        if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
-            currentSectionIndex.value = i;
-            break;
-        }
-    }
-};
+// Initialize isLargeScreen with null for SSR
+const isLargeScreen = ref(null);
 
 const isCurrentSection = computed(() => (index) => index === currentSectionIndex.value);
 const isNextSection = computed(() => (index) => index === currentSectionIndex.value + 1);
 
-const isLargeScreen = ref(window.innerWidth >= 1024)
-
-const handleResize = () => {
-    isLargeScreen.value = window.innerWidth >= 1024
-}
-
-onMounted(() => {
-    window.addEventListener('resize', handleResize)
-})
-
-onUnmounted(() => {
-    window.removeEventListener('resize', handleResize)
-})
-
-onMounted(() => {
-    sections.value = document.querySelectorAll('section');
-    window.addEventListener('scroll', updateCurrentSection);
-    updateCurrentSection();
-
-    const createObserver = (elementRef, visibilityRef) => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                visibilityRef.value = entry.isIntersecting;
-            });
-        });
-        
-        if (elementRef.value) {
-            observer.observe(elementRef.value);
+// Client-side only code
+if (typeof window !== 'undefined') {
+    const { y: scrollY } = useScroll(window);
+    
+    const updateCurrentSection = () => {
+        const scrollPosition = scrollY.value + window.innerHeight / 2;
+        for (let i = 0; i < sections.value.length; i++) {
+            const section = sections.value[i];
+            if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
+                currentSectionIndex.value = i;
+                break;
+            }
         }
-        
-        return observer;
     };
 
-    const cardObserver = createObserver(cardRef, isVisibleCard);
-    const timeSchedObserver = createObserver(timeSchedRef, isVisibleTimeSched);
-    const eventsObserver = createObserver(eventsRef, isVisibleEvents);
+    const handleResize = () => {
+        isLargeScreen.value = window.innerWidth >= 1024;
+    };
 
-    onUnmounted(() => {
-        cardObserver.disconnect();
-        timeSchedObserver.disconnect();
-        eventsObserver.disconnect();
-        window.removeEventListener('scroll', updateCurrentSection);
+    onMounted(() => {
+        // Set initial value
+        isLargeScreen.value = window.innerWidth >= 1024;
+
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('scroll', updateCurrentSection);
+        
+        sections.value = document.querySelectorAll('section');
+        updateCurrentSection();
+
+        const createObserver = (elementRef, visibilityRef) => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    visibilityRef.value = entry.isIntersecting;
+                });
+            });
+            
+            if (elementRef.value) {
+                observer.observe(elementRef.value);
+            }
+            
+            return observer;
+        };
+
+        const cardObserver = createObserver(cardRef, isVisibleCard);
+        const timeSchedObserver = createObserver(timeSchedRef, isVisibleTimeSched);
+        const eventsObserver = createObserver(eventsRef, isVisibleEvents);
+
+        // Clean up on component unmount
+        onUnmounted(() => {
+            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('scroll', updateCurrentSection);
+            cardObserver.disconnect();
+            timeSchedObserver.disconnect();
+            eventsObserver.disconnect();
+        });
     });
-});
+}
 </script>
+
 
 <template>
     <Head>
@@ -116,13 +115,13 @@ onMounted(() => {
             :class="{ 'scale-100 opacity-100': isCurrentSection(0), 'scale-95 opacity-70': !isCurrentSection(0) }"
             >
             <div class="px-6 max-w-screen-2xl text-center py-16 md:mt-48 md:mb-36">
-                <h1 class="mb-3 sm:mb-4 text-5xl sm:text-4xl md:text-6xl lg:text-9xl font-semibold tracking-tight leading-none text-gray-900 dark:text-white allura-font">
+                <h1 class="mb-3 sm:mb-4 text-5xl sm:text-4xl md:text-6xl lg:text-9xl font-semibold tracking-tight leading-none text-gray-900 allura-font">
                 {{ $t('landing.title') }}
                 </h1>
-                <h1 class="mb-4 sm:mb-6 text-4xl sm:text-3xl md:text-5xl lg:text-9xl font-semibold tracking-tight leading-none text-gray-750 dark:text-white allura-font">
+                <h1 class="mb-4 sm:mb-6 text-4xl sm:text-3xl md:text-5xl lg:text-9xl font-semibold tracking-tight leading-none text-gray-750 allura-font">
                 {{ $t('landing.subtitle') }}
                 </h1>
-                <p class="text-lg sm:text-base md:text-xl lg:text-2xl font-medium text-gray-650 dark:text-gray-400">
+                <p class="text-lg sm:text-base md:text-xl lg:text-2xl font-medium text-gray-650">
                 {{ $t('landing.quote') }}<br class="sm:hidden">
                 "{{ $t('landing.quote_continued') }}"<br>
                 {{ $t('landing.verse') }}

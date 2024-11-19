@@ -2,11 +2,35 @@
 import { Head } from '@inertiajs/vue3';
 import LandingPageNav from '@/Components/LandingPageNav.vue';
 import Footer from '@/Components/Footer.vue';
+import { onMounted, onBeforeUnmount } from 'vue';
 
-defineProps({
+const props = defineProps({
     canLogin: {
         type: Boolean,
     },
+});
+
+const handleScrollAnimations = () => {
+    if (typeof window === 'undefined') return; // SSR check
+    
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach(element => {
+        const rect = element.getBoundingClientRect();
+        const isVisible = rect.top <= window.innerHeight * 0.8;
+        if (isVisible) {
+            element.classList.add('visible');
+        }
+    });
+};
+
+onMounted(() => {
+    handleScrollAnimations();
+    window.addEventListener('scroll', handleScrollAnimations);
+});
+
+onBeforeUnmount(() => {
+    if (typeof window === 'undefined') return; // SSR check
+    window.removeEventListener('scroll', handleScrollAnimations);
 });
 </script>
 
@@ -163,28 +187,3 @@ defineProps({
     }
 }
 </style>
-
-<script>
-
-export default {
-    mounted() {
-        this.handleScrollAnimations();
-        window.addEventListener('scroll', this.handleScrollAnimations);
-    },
-    beforeUnmount() {
-        window.removeEventListener('scroll', this.handleScrollAnimations);
-    },
-    methods: {
-        handleScrollAnimations() {
-            const elements = document.querySelectorAll('.animate-on-scroll');
-            elements.forEach(element => {
-                const rect = element.getBoundingClientRect();
-                const isVisible = rect.top <= window.innerHeight * 0.8;
-                if (isVisible) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-    }
-};
-</script>

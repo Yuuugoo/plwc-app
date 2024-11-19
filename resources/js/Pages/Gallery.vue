@@ -56,8 +56,6 @@ const formatEventYear = (dateString) => {
     }
 };
 
-console.log(props.events);
-
 const parseImageUrls = (imageUrlString) => {
     try {
         const jsonPart = imageUrlString.match(/(?<=\/storage\/)(.*)/)[0];
@@ -139,7 +137,7 @@ onUnmounted(() => {
             <div class="absolute inset-0 bg-cloud-bg bg-cover bg-center bg-fixed"></div>
             <div class="absolute inset-0 bg-black/40"></div>
             <div class="relative flex items-center justify-center h-full text-center px-4">
-                <div class="max-w-4xl">
+                <div class="max-w-4xl lg:mt-48 mt-28">
                     <h1 class="mb-6 text-6xl font-extrabold text-white allura-font animate-fade-in">
                         {{ $t('gallery.hero-title') }}
                     </h1>
@@ -212,7 +210,7 @@ onUnmounted(() => {
                                     :key="index"
                                     :class="{'col-span-2': getDisplayImages(event).length === 1}"
                                     class="relative overflow-hidden cursor-pointer"
-                                    @click.stop="openImageViewer(event, index)"
+                                    @click.stop="openEventModal(event)"
                                 >
                                     <img 
                                         :src="image" 
@@ -279,7 +277,6 @@ onUnmounted(() => {
             </div>
         </div>
 
-        <!-- Image Viewer -->
         <div 
             v-if="showImageViewer" 
             class="fixed inset-0 bg-black/90 flex items-center justify-center z-50"
