@@ -24,7 +24,7 @@ createServer((page) =>
             app.use(plugin)
                .use(ZiggyVue, {
                     ...page.props.ziggy,
-                    location: new URL(page.props.ziggy.url),
+                    location: new URL(page.props.ziggy.location),
                 })
                .use(i18nVue, {
                     lang: 'en',

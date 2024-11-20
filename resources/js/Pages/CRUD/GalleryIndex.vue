@@ -2,12 +2,12 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Breadcrumb from '@/Components/Breadcrumb.vue';
 import { Head, Link } from '@inertiajs/vue3';
-import { router } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
     events: Array
 });
-console.log(props.events);
+
 
 const breadcrumbItems = [
     { text: 'CRUD', href: '#' },
@@ -15,8 +15,11 @@ const breadcrumbItems = [
 ];
 
 const deleteEvent = (id) => {
-    if (confirm('Are you sure you want to delete this event?')) {
-        router.delete(route('gallery.destroy', id));
+    if (typeof window !== 'undefined') {
+        if (confirm('Are you sure you want to delete this event?')) {
+            console.log(id,"deleted succesfully");
+            router.delete(route('gallery.destroy', id));
+        }
     }
 };
 </script>

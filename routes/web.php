@@ -124,8 +124,8 @@ Route::prefix('crud')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
     Route::post('/gallery', [GalleryController::class, 'store'])->name('gallery.store');
     Route::post('/gallery/upload', [GalleryController::class, 'upload'])->name('gallery.upload');
-    Route::get('/gallery/{eventId}/edit', [GalleryController::class, 'edit'])->name('gallery.edit');
-    Route::delete('/gallery/{eventId}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+    Route::get('/gallery/{gallery}/edit', [GalleryController::class, 'edit'])->name('gallery.edit');
+    Route::delete('/gallery/{gallery}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
 
 
     Route::get('/new-friends', [NewFriendController::class, 'index'])->name('new-friends');

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted, shallowRef } from 'vue';
 import { Head } from '@inertiajs/vue3';
 import LandingPageNav from '@/Components/LandingPageNav.vue';
 import Footer from '@/Components/Footer.vue';
@@ -12,70 +12,83 @@ const props = defineProps({
     },
 });
 
-const selectedEventType = ref('All');
-const selectedYear = ref('All');
+// Use shallowRef for large datasets that don't need deep reactivity
+const selectedEventType = shallowRef('All');
+const selectedYear = shallowRef('All');
 const showModal = ref(false);
 const showImageViewer = ref(false);
-const selectedEvent = ref(null);
+const selectedEvent = shallowRef(null);
 const currentImageIndex = ref(0);
 
-// Compute unique event types
+// Memoize event processing
+const processedEvents = computed(() => {
+    return props.events.map(event => {
+        const date = new Date(event.created_at);
+        return {
+            ...event,
+            year: !isNaN(date.getTime()) ? date.getFullYear().toString() : null,
+            processedImages: parseImageUrls(event.image_url),
+        };
+    });
+});
+
+// Optimize unique values computation
 const eventTypes = computed(() => {
-    const types = new Set(props.events.map(event => event.event_type));
+    const types = new Set();
+    for (const event of props.events) {
+        types.add(event.event_type);
+    }
     return ['All', ...Array.from(types)];
 });
 
-// Compute unique years from event dates
 const eventYears = computed(() => {
-    const years = new Set(props.events.map(event => {
-        const date = new Date(event.created_at);
-        // Check if the date is valid before getting the year
-        return !isNaN(date.getTime()) ? date.getFullYear().toString() : null;
-    }).filter(year => year !== null)); // Remove any null values
+    const years = new Set();
+    for (const event of processedEvents.value) {
+        if (event.year) years.add(event.year);
+    }
     return ['All', ...Array.from(years).sort((a, b) => b.localeCompare(a))];
 });
 
-// Filter events based on both type and year
+// Optimize filtering with memoization
 const filteredEvents = computed(() => {
-    return props.events.filter(event => {
-        const date = new Date(event.created_at);
-        const eventYear = !isNaN(date.getTime()) ? date.getFullYear().toString() : null;
+    if (selectedEventType.value === 'All' && selectedYear.value === 'All') {
+        return processedEvents.value;
+    }
+    
+    return processedEvents.value.filter(event => {
         const matchesType = selectedEventType.value === 'All' || event.event_type === selectedEventType.value;
-        const matchesYear = selectedYear.value === 'All' || eventYear === selectedYear.value;
+        const matchesYear = selectedYear.value === 'All' || event.year === selectedYear.value;
         return matchesType && matchesYear;
     });
 });
 
-// Add this helper function with your other functions in the script section
-const formatEventYear = (dateString) => {
+// Optimize image URL parsing
+function parseImageUrls(imageUrlString) {
     try {
-        const date = new Date(dateString);
-        return !isNaN(date.getTime()) ? date.getFullYear() : '-';
-    } catch {
-        return '-';
-    }
-};
-
-const parseImageUrls = (imageUrlString) => {
-    try {
+        const cached = imageUrlsCache.get(imageUrlString);
+        if (cached) return cached;
+        
         const jsonPart = imageUrlString.match(/(?<=\/storage\/)(.*)/)[0];
-        return JSON.parse(jsonPart.replace(/\\/g, ''));
+        const result = JSON.parse(jsonPart.replace(/\\/g, ''));
+        imageUrlsCache.set(imageUrlString, result);
+        return result;
     } catch (e) {
         console.error("Error parsing image_url:", e);
         return [];
     }
-};
+}
+const imageUrlsCache = new Map();
 
+// Optimize display images calculation
 const getDisplayImages = (event) => {
-    const images = parseImageUrls(event.image_url);
-    return images.slice(0, 4).map(src => `/storage/${src}`);
+    return event.processedImages.slice(0, 4).map(src => `/storage/${src}`);
 };
 
 const getAdditionalImagesCount = (event) => {
-    const images = parseImageUrls(event.image_url);
-    return Math.max(0, images.length - 4);
+    return Math.max(0, event.processedImages.length - 4);
 };
 
+// Modal handling with loading optimization
 const openEventModal = (event) => {
     selectedEvent.value = event;
     showModal.value = true;
@@ -97,33 +110,39 @@ const closeImageViewer = () => {
     currentImageIndex.value = 0;
 };
 
+// Optimize image navigation
 const nextImage = () => {
-    const images = parseImageUrls(selectedEvent.value.image_url);
+    if (!selectedEvent.value) return;
+    const images = selectedEvent.value.processedImages;
     currentImageIndex.value = (currentImageIndex.value + 1) % images.length;
 };
 
 const previousImage = () => {
-    const images = parseImageUrls(selectedEvent.value.image_url);
+    if (!selectedEvent.value) return;
+    const images = selectedEvent.value.processedImages;
     currentImageIndex.value = (currentImageIndex.value - 1 + images.length) % images.length;
 };
 
-const handleKeydown = (e) => {
-    if (showImageViewer.value) {
-        if (e.key === 'ArrowRight') nextImage();
-        if (e.key === 'ArrowLeft') previousImage();
-        if (e.key === 'Escape') closeImageViewer();
-    }
-    if (showModal.value && e.key === 'Escape') {
-        closeModal();
-    }
-};
-
+// Optimize event listeners
+let keydownHandler;
 onMounted(() => {
-    window.addEventListener('keydown', handleKeydown);
+    keydownHandler = (e) => {
+        if (showImageViewer.value) {
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') previousImage();
+            if (e.key === 'Escape') closeImageViewer();
+        }
+        if (showModal.value && e.key === 'Escape') {
+            closeModal();
+        }
+    };
+    window.addEventListener('keydown', keydownHandler);
 });
 
 onUnmounted(() => {
-    window.removeEventListener('keydown', handleKeydown);
+    if (keydownHandler) {
+        window.removeEventListener('keydown', keydownHandler);
+    }
 });
 </script>
 
@@ -133,6 +152,7 @@ onUnmounted(() => {
     <div class="flex flex-col min-h-screen">
         <LandingPageNav :canLogin="canLogin" />
         
+        <!-- Hero Section -->
         <div class="relative h-[70vh] overflow-hidden">
             <div class="absolute inset-0 bg-cloud-bg bg-cover bg-center bg-fixed"></div>
             <div class="absolute inset-0 bg-black/40"></div>
@@ -151,12 +171,10 @@ onUnmounted(() => {
             </div>
         </div>
 
-        <!-- Gallery Section -->
         <div class="bg-gray-50 min-h-screen py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Filter Section -->
+                <!-- Filters -->
                 <div class="flex flex-col items-center justify-center space-y-6 mb-12">
-                    <!-- Event Type Buttons -->
                     <div class="flex items-center justify-center space-x-2 overflow-x-auto pb-4 w-full">
                         <button 
                             v-for="type in eventTypes"
@@ -173,7 +191,6 @@ onUnmounted(() => {
                         </button>
                     </div>
 
-                    <!-- Year Filter Dropdown -->
                     <div class="relative w-48">
                         <select
                             v-model="selectedYear"
@@ -195,14 +212,13 @@ onUnmounted(() => {
                     </div>
                 </div>
 
-                <!-- Gallery Grid -->
+                <!-- Optimized Gallery Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div 
                         v-for="event in filteredEvents" 
                         :key="event.id"
                         class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden"
                     >
-                        <!-- Images Grid -->
                         <div class="aspect-[4/3] overflow-hidden">
                             <div :class="{'grid grid-cols-2 gap-1': getDisplayImages(event).length > 1, 'w-full': getDisplayImages(event).length === 1}">
                                 <div 
@@ -215,6 +231,7 @@ onUnmounted(() => {
                                     <img 
                                         :src="image" 
                                         :alt="'Image from ' + event.event_name"
+                                        loading="lazy"
                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         :style="getDisplayImages(event).length === 1 ? 'aspect-ratio: 4/3;' : 'aspect-ratio: 1/1;'"
                                     >
@@ -223,7 +240,6 @@ onUnmounted(() => {
                             </div>
                         </div>
 
-                        <!-- Event Info Overlay -->
                         <div 
                             @click="openEventModal(event)"
                             class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-300 cursor-pointer"
@@ -231,7 +247,7 @@ onUnmounted(() => {
                             <h3 class="text-xl font-semibold mb-1">{{ event.event_name }}</h3>
                             <div class="flex items-center space-x-2 text-sm opacity-80">
                                 <span>{{ event.event_type }}</span>
-                                <span>• {{ formatEventYear(event.created_at) }}</span>
+                                <span>• {{ event.year }}</span>
                                 <span v-if="getAdditionalImagesCount(event) > 0" class="ml-2">
                                     +{{ getAdditionalImagesCount(event) }} more photos
                                 </span>
